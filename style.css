@@ -8,6 +8,17 @@
   border-radius: 10px;
 }
 
+#handle {
+  position: absolute;
+  margin-top: 13%;
+  margin-left: 20%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 100px;
+  background-color: red;
+  border: yellow;
+}
+
 #inputs{
   margin-top: 150px;
   margin-left: 35%;
