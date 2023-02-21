@@ -18,12 +18,12 @@
 
 $(document).ready(function() {
 
-  $('#slider1').change(function() {
+  $('#slider1').on('input', function() {
     var value = $(this).val();
     console.log(value);
   });
 
-  $('#slider2').change(function() {
+  $('#slider2').on('input', function() {
     var value = $(this).val();
     console.log(value);
   });
