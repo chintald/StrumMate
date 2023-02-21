@@ -1,0 +1,45 @@
+#guitar {
+  width: 600px;
+  height: 300px;
+  position: relative;
+  margin-top: 3%;
+  margin-left: 27%;
+  border: 5px solid #333;
+  border-radius: 10px;
+}
+
+#inputs{
+  margin-top: 150px;
+  margin-left: 35%;
+  transform: translateY(-50%);
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 200px;
+  height: 20px;
+  margin-bottom: 10px;
+  background-color: #ddd;
+  border-radius: 10px;
+  outline: none;
+  transform: rotate(-90deg);
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #666;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: rotate(-90deg);
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: #666;
+  border-radius: 50%;
+  transform: rotate(-90deg);
+  cursor: pointer;
+}
