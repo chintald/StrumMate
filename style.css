@@ -10,11 +10,11 @@
 
 #handle {
   position: absolute;
-  margin-top: 13%;
-  margin-left: 20%;
+  margin-top: 20%;
+  margin-left: 10%;
   transform: translateX(-50%);
-  width: 10px;
-  height: 100px;
+  width: 50px;
+  height: 10px;
   background-color: red;
   border: yellow;
 }
