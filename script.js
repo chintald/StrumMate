@@ -37,7 +37,7 @@ $(document).ready(function () {
       i === baseAngle && (ltr = 1);
     }, timeInterval);
   }
-
+0
   const clearTimer = (isStop = false) => {
     timer && clearInterval(timer);
     timer = null;
@@ -49,7 +49,7 @@ $(document).ready(function () {
   }
 
   var slider1Val = 0;
-  var slider2Val = 0;
+  var slider2Val = 25;
 
   const sliderFunc = (sliderVal, timeInterval) => {
     switch (true) {

@@ -25,6 +25,10 @@
   transform: translateY(-50%);
 }
 
+#slider2{
+  transform: rotate(90deg);
+}
+
 input[type=range] {
   -webkit-appearance: none;
   width: 200px;
