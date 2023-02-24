@@ -8,10 +8,25 @@
   border-radius: 10px;
 }
 
+#handle {
+  position: absolute;
+  margin-top: 20%;
+  margin-left: 10%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 10px;
+  background-color: red;
+  border: yellow;
+}
+
 #inputs{
   margin-top: 150px;
   margin-left: 35%;
   transform: translateY(-50%);
+}
+
+#slider2{
+  transform: rotate(90deg);
 }
 
 input[type=range] {
