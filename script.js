@@ -11,13 +11,11 @@ $(document).ready(function () {
   $('#slider1').on('input', function () {
     var value = $(this).val();
     slider1Value.html(value);
-    console.log(value);
   });
 
   $('#slider2').on('input', function () {
     var value = $(this).val();
     slider2Value.html(value);
-    console.log(value);
   });
 
   var line = document.getElementById("line");
@@ -29,21 +27,25 @@ $(document).ready(function () {
   var timer = null;
 
   const setTimer = (maxAngle, timeInterval) => {
+    i >= maxAngle && (ltr = -1);
+    i === baseAngle && (ltr = 1);
     timer = setInterval(function () {
       ltr === 1 && (i += 1);
       ltr === -1 && (i -= 1);
       line.setAttribute("transform", "rotate(" + i + ", 100, 100)");
-      i === maxAngle && (ltr = -1);
+      i >= maxAngle && (ltr = -1);
       i === baseAngle && (ltr = 1);
     }, timeInterval);
   }
 
-  const clearTimer = () => {
+  const clearTimer = (isStop = false) => {
     timer && clearInterval(timer);
     timer = null;
-    i = baseAngle
-    ltr = 1;
-    line.setAttribute("transform", "rotate(" + baseAngle + ", 100, 100)");
+    if (isStop) {
+      i = baseAngle
+      ltr = 1;
+      line.setAttribute("transform", "rotate(" + baseAngle + ", 100, 100)");
+    }
   }
 
   var slider1Val = 0;
@@ -64,7 +66,7 @@ $(document).ready(function () {
         timer === null && setTimer(196, timeInterval);
         break;
       default:
-        clearTimer();
+        clearTimer(true);
         break;
     }
   }
