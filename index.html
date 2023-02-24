@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="script.js"></script>
-
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/johnny-five/1.6.0/johnny-five.min.js"></script> -->
 </head>
 
 <body>
@@ -17,15 +15,7 @@
       <line id="line" x1="3" y1="100" x2="100" y2="100" stroke-width="4" stroke="red">
       </line>
     </svg>
-    <img src="guitar.png" alt="Guitar" usemap="#guitar-map" height="300px" width="600px">
-    <map name="guitar-map">
-      <area id="string-1" shape="rect" coords="50, 90, 115, 110">
-      <area id="string-2" shape="rect" coords="50, 110, 115, 130">
-      <area id="string-3" shape="rect" coords="50, 130, 115, 150">
-      <area id="string-4" shape="rect" coords="50, 150, 115, 170">
-      <area id="string-5" shape="rect" coords="50, 170, 115, 190">
-      <area id="string-6" shape="rect" coords="50, 190, 115, 210">
-    </map>
+    <img src="guitar.png" alt="Guitar" height="300px" width="600px">
   </div>
 
   <div id="inputs">
@@ -34,33 +24,6 @@
     <input type="range" id="slider2" name="slider2" min="0" max="25" value="25">
     <span class="slider2-range-value"></span>
   </div>
-  <!-- <script>
-		// Initialize Johnny-Five
-		var five = require("johnny-five");
-		var board = new five.Board();
 
-		board.on("ready", function() {
-			// Initialize servo motor
-			var servo = new five.Servo({
-				pin: 9,
-				startAt: 90
-			});
-
-			// Read slider 1 value and set servo position
-			$("#slider1").on("input", function() {
-				var val = $(this).val();
-				servo.to(val);
-			});
-
-			// Read slider 2 value and set servo position
-			$("#slider2").on("input", function() {
-				var val = $(this).val();
-				servo.to(val);
-			});
-		});
-	</script> -->
-  <script>
-  </script>
 </body>
-
 </html>
