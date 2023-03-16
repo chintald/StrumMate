@@ -7,6 +7,13 @@ $(document).ready(function () {
   const slider2 = document.getElementById("slider2");
   const slider1Value = $('.slider1-range-value');
   const slider2Value = $('.slider2-range-value');
+  const btn1 = document.getElementById("btn1");
+  const btn2 = document.getElementById("btn2");
+  const btn3 = document.getElementById("btn3");
+  const btn4 = document.getElementById("btn4");
+  const btn5 = document.getElementById("btn5");
+  const btn6 = document.getElementById("btn6");
+  const btn7 = document.getElementById("btn7");
 
   $('#slider1').on('input', function () {
     var value = $(this).val();
@@ -19,7 +26,22 @@ $(document).ready(function () {
   });
 
   var line = document.getElementById("line");
-  line.setAttribute("transform", "rotate(" + 160 + ", 100, 100)");
+  line.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+
+  var line1 = document.getElementById("line1");
+  line1.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+
+  var line2 = document.getElementById("line2");
+  line2.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+
+  var line3 = document.getElementById("line3");
+  line3.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+
+  var line4 = document.getElementById("line4");
+  line4.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+
+  var line5 = document.getElementById("line5");
+  line5.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
 
   var i = 160;
   var baseAngle = 160;

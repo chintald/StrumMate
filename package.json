@@ -9,7 +9,6 @@
   "author": "Chintal Raval",
   "license": "ISC",
   "dependencies": {
-    "johnny-five": "^2.1.0",
     "jquery-ui": "^1.13.2",
     "tone": "^14.7.77"
   }

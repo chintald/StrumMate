@@ -54,3 +54,22 @@ input[type=range]::-moz-range-thumb {
   transform: rotate(-90deg);
   cursor: pointer;
 }
+
+#inputBtns{
+  margin-top: 20px;
+  margin-left: 28%;
+  flex: 1;
+  flex-flow: row;
+  display: block;
+}
+
+.button {
+  background-color: #b2b6b2;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}

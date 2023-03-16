@@ -13,10 +13,24 @@
 
 <body>
   <div class="guitar" id="guitar">
-    <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; margin: 10px; margin-top: 50px;">
-      <line id="line" x1="3" y1="100" x2="100" y2="100" stroke-width="4" stroke="red">
+    <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; margin-top: 25px;">
+      <line id="line" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red">
+      </line>
+      <line id="line1" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
+      </line>
+      <line id="line2" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
+      </line>
+      <line id="line3" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
+      </line>
+      <line id="line4" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
+      </line>
+      <line id="line5" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
       </line>
     </svg>
+    
+    <div style="position: absolute; margin: 10px; margin-top: 117px; margin-left: 90px;">
+      <img src="mockup-two-covers.jpg" alt="box" height="55px" width="30px"/>
+    </div>
     <img src="guitar.png" alt="Guitar" usemap="#guitar-map" height="300px" width="600px">
     <map name="guitar-map">
       <area id="string-1" shape="rect" coords="50, 90, 115, 110">
@@ -28,6 +42,15 @@
     </map>
   </div>
 
+  <div id="inputBtns">
+    <button id="btn1" class="button">Str 1</button>
+    <button id="btn2" class="button">Str 2</button>
+    <button id="btn3" class="button">Str 3</button>
+    <button id="btn4" class="button">Str 4</button>
+    <button id="btn5" class="button">Str 5</button>
+    <button id="btn6" class="button">Str 6</button>
+    <button id="btn7" class="button">All str</button>
+  </div>
   <div id="inputs">
     <input type="range" id="slider1" name="slider1" min="0" max="1023" value="1">
     <span class="slider1-range-value"></span>
