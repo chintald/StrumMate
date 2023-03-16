@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="script.js"></script>
-
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/johnny-five/1.6.0/johnny-five.min.js"></script> -->
 </head>
 
 <body>
@@ -54,36 +52,9 @@
   <div id="inputs">
     <input type="range" id="slider1" name="slider1" min="0" max="1023" value="1">
     <span class="slider1-range-value"></span>
-    <input type="range" id="slider2" name="slider2" min="0" max="25" value="1">
+    <input type="range" id="slider2" name="slider2" min="0" max="25" value="25">
     <span class="slider2-range-value"></span>
   </div>
-  <!-- <script>
-		// Initialize Johnny-Five
-		var five = require("johnny-five");
-		var board = new five.Board();
 
-		board.on("ready", function() {
-			// Initialize servo motor
-			var servo = new five.Servo({
-				pin: 9,
-				startAt: 90
-			});
-
-			// Read slider 1 value and set servo position
-			$("#slider1").on("input", function() {
-				var val = $(this).val();
-				servo.to(val);
-			});
-
-			// Read slider 2 value and set servo position
-			$("#slider2").on("input", function() {
-				var val = $(this).val();
-				servo.to(val);
-			});
-		});
-	</script> -->
-  <script>
-  </script>
 </body>
-
 </html>
