@@ -1,6 +1,21 @@
 $(document).ready(function () {
   var line = document.getElementById("line");
-  line.setAttribute("transform", "rotate(" + 160 + ", 100, 100)");
+  line.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+
+  var line1 = document.getElementById("line1");
+  line1.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+
+  var line2 = document.getElementById("line2");
+  line2.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+
+  var line3 = document.getElementById("line3");
+  line3.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+
+  var line4 = document.getElementById("line4");
+  line4.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+
+  var line5 = document.getElementById("line5");
+  line5.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
 
   // Code for Music
 
