@@ -117,13 +117,17 @@ $(document).ready(function () {
   // Define a variable to keep track of the current audio file index
   let currentIndex = 0;
 
+  let sliderVal = 0;
   // Define a function to play the audio
   function playAudio() {
     // console.log(sliderVal, currentIndex);
-    // if (sliderVal == 0) {
-    //   audio.pause();
-    //   return;
-    // }
+    if (sliderVal == 0) {
+      audio.pause();
+      currentIndex = 0;
+      strDir = 1;
+      resetLines();
+      return;
+    }
     // If all audio files have been played, stop playing
     if (currentIndex >= audioFiles.length) {
       return;
@@ -138,46 +142,45 @@ $(document).ready(function () {
         switch (currentIndex) {
           case 0:
             line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-            // if (sliderVal == 1) {
-            //   strDir = 0;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 6) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 1:
             line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-            // if (sliderVal == 2) {
-            //   strDir = 0;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 5) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 2:
             line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-            // if (sliderVal == 3) {
-            //   strDir = 0;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 4) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 3:
             line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-            // if (sliderVal == 4) {
-            //   strDir = 0;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 3) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 4:
             line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-            // if (sliderVal == 5) {
-            //   strDir = 0;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 2) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 5:
             line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-            // if (sliderVal == 6) {
-            //   strDir = 0;
-            //   currentIndex = -1;
-            // }
-            strDir = 0;
+            if (sliderVal == 1) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
         }
       }
@@ -187,46 +190,45 @@ $(document).ready(function () {
         switch (currentIndex) {
           case 0:
             line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
-            // if (sliderVal == 1) {
-            //   strDir = 1;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 6) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 1:
             line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
-            // if (sliderVal == 2) {
-            //   strDir = 1;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 5) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 2:
             line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
-            // if (sliderVal == 3) {
-            //   strDir = 1;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 4) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 3:
             line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
-            // if (sliderVal == 4) {
-            //   strDir = 1;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 3) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 4:
             line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
-            // if (sliderVal == 5) {
-            //   strDir = 1;
-            //   currentIndex = -1;
-            // }
+            if (sliderVal == 2) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 5:
             line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
-            // if (sliderVal == 6) {
-            //   strDir = 1;
-            //   currentIndex = -1;
-            // }
-            strDir = 1;
+            if (sliderVal == 1) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
         }
       }
@@ -238,22 +240,45 @@ $(document).ready(function () {
         switch (currentIndex) {
           case 0:
             line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+            if (sliderVal == 6) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 1:
             line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+            if (sliderVal == 5) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 2:
             line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+            if (sliderVal == 4) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 3:
             line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+            if (sliderVal == 3) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 4:
             line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+            if (sliderVal == 2) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
           case 5:
             line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-            strDir = 0;
+            if (sliderVal == 1) {
+              strDir = 0;
+              currentIndex = -1;
+            }
             break;
         }
       }
@@ -263,28 +288,50 @@ $(document).ready(function () {
         switch (currentIndex) {
           case 0:
             line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
+            if (sliderVal == 6) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 1:
             line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+            if (sliderVal == 5) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 2:
             line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+            if (sliderVal == 4) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 3:
             line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+            if (sliderVal == 3) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 4:
             line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+            if (sliderVal == 2) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
           case 5:
             line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
-            strDir = 1;
+            if (sliderVal == 1) {
+              strDir = 1;
+              currentIndex = -1;
+            }
             break;
         }
       }
     }
 
-    // audio.pause();
     // Play the audio
     audio.play();
 
@@ -293,6 +340,15 @@ $(document).ready(function () {
 
     // Set up an event listener to play the next audio file when the current one has ended
     audio.addEventListener('ended', playAudio);
+  }
+
+  function resetLines() {
+    line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+    line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+    line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+    line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+    line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+    line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
   }
 
   function playSingleTone(e, strNum) {
@@ -462,8 +518,13 @@ $(document).ready(function () {
 
   slider1.addEventListener("input", function () {
     slider1Val = this.value;
+    sliderVal = this.value;
+    // currentIndex = 0;
+    audio.pause();
     currentIndex = 0;
-    playAudio(slider1Val);
+    strDir = 1;
+    resetLines();
+    playAudio();
     // sliderFunc(slider1Val, slider2Val);
   });
 
