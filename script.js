@@ -52,167 +52,264 @@ $(document).ready(function () {
 
 
   //============================== Milestone 3 code=================
-  btn1.onclick = function () { btn1Click(this) };
-  btn2.onclick = function () { btn2Click(this) };
-  btn3.onclick = function () { btn3Click(this) };
-  btn4.onclick = function () { btn4Click(this) };
-  btn5.onclick = function () { btn5Click(this) };
-  btn6.onclick = function () { btn6Click(this) };
+  var isFromTop = true;
 
-  function btn1Click(e) {
-    //First time click
-    if (e.name != 'Click') {
-      e.name = "Click";
-      line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-      str1DefNoteESoft.currentTime = 0;
-      str1DefNoteESoft.play();
-      setTimeout(function () {
-        str1DefNoteESoft.pause();
+  btn1.onclick = function () { playSingleTone(this, 1) };
+  btn2.onclick = function () { playSingleTone(this, 2) };
+  btn3.onclick = function () { playSingleTone(this, 3) };
+  btn4.onclick = function () { playSingleTone(this, 4) };
+  btn5.onclick = function () { playSingleTone(this, 5) };
+  btn6.onclick = function () { playSingleTone(this, 6) };
+  btn7.onclick = function () {
+    if (isFromTop) {
+      btn7.value = "Bottom";
+      isFromTop = false;
+    } else {
+      btn7.value = "Top";
+      isFromTop = true;
+    }
+  }
+  btn8.onclick = function () {
+    playAudio();
+  }
+
+  var audioFiles = [];
+  if (isFromTop) {
+    audioFiles = [
+      string1DefaultNoteESoft,
+      string2DefaultNoteA,
+      string3DefaultNoteD,
+      string4DefaultNoteG,
+      string5DefaultNoteB,
+      string6DefaultNoteEHeavy,
+    ];
+  } else {
+    audioFiles = [
+      string6DefaultNoteEHeavy,
+      string5DefaultNoteB,
+      string4DefaultNoteG,
+      string3DefaultNoteD,
+      string2DefaultNoteA,
+      string1DefaultNoteESoft
+    ];
+  }
+  // Preload the audio files
+  audioFiles.forEach(file => {
+    const audio = new Audio();
+    audio.src = file;
+    audio.load();
+  });
+
+  // Get a reference to the audio element
+  const audio = new Audio();
+
+  // Define a variable to keep track of the current audio file index
+  let currentIndex = 0;
+
+  // Define a function to play the audio
+  function playAudio() {
+    // If all audio files have been played, stop playing
+    if (currentIndex >= audioFiles.length) {
+      return;
+    }
+
+    // Set the source of the audio element
+    audio.src = audioFiles[currentIndex];
+
+    // line angle change
+    switch (currentIndex) {
+      case 0:
+        line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
+        break;
+      case 1:
+        line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+        break;
+      case 2:
+        line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+        break;
+      case 3:
+        line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+        break;
+      case 4:
+        line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+        break;
+      case 5:
+        line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+        break;
+    }
+
+    // Play the audio
+    audio.currentTime = 0;
+    audio.play();
+    setTimeout(function () {
+      audio.pause;
+      audio.currentTime = 0;
+    }, 1100);
+
+    // Increment the current index
+    currentIndex++;
+
+    // Set up an event listener to play the next audio file when the current one has ended
+    audio.addEventListener('ended', playAudio);
+  }
+
+  function playSingleTone(e, strNum) {
+    switch (strNum) {
+
+      case (1):
+        //First time click
+        if (e.name != 'Click') {
+          e.name = "Click";
+          line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
+        }
+        //When click it again..
+        else if (e.name == 'Click') {
+          e.name = "Unclick";
+          line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+        }
         str1DefNoteESoft.currentTime = 0;
-      }, 1100);
-    }
+        str1DefNoteESoft.play();
+        setTimeout(function () {
+          str1DefNoteESoft.pause();
+          str1DefNoteESoft.currentTime = 0;
+        }, 1100);
+        break;
 
-    //When click it again..
-    else if (e.name == 'Click') {
-      e.name = "Unclick";
-      line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
-      str1DefNoteESoft.currentTime = 0;
-      str1DefNoteESoft.play();
-      setTimeout(function () {
-        str1DefNoteESoft.pause();
-        str1DefNoteESoft.currentTime = 0;
-      }, 1100);
-    }
-  }
-
-  function btn2Click(e) {
-    //First time click
-    if (e.name != 'Click') {
-      e.name = "Click";
-      line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-      str2DefNoteA.currentTime = 0;
-      str2DefNoteA.play();
-      setTimeout(function () {
-        str2DefNoteA.pause();
+      case (2):
+        if (e.name != 'Click') {
+          e.name = "Click";
+          line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+        }
+        else if (e.name == 'Click') {
+          e.name = "Unclick";
+          line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+        }
         str2DefNoteA.currentTime = 0;
-      }, 1100);
-    }
+        str2DefNoteA.play();
+        setTimeout(function () {
+          str2DefNoteA.pause();
+          str2DefNoteA.currentTime = 0;
+        }, 1100);
+        break;
 
-    //When click it again..
-    else if (e.name == 'Click') {
-      e.name = "Unclick";
-      line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
-      str2DefNoteA.currentTime = 0;
-      str2DefNoteA.play();
-      setTimeout(function () {
-        str2DefNoteA.pause();
-        str2DefNoteA.currentTime = 0;
-      }, 1100);
-    }
-  }
-
-  function btn3Click(e) {
-    //First time click
-    if (e.name != 'Click') {
-      e.name = "Click";
-      line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-      str3DefNoteD.currentTime = 0;
-      str3DefNoteD.play();
-      setTimeout(function () {
-        str3DefNoteD.pause();
+      case (3):
         str3DefNoteD.currentTime = 0;
-      }, 1100);
-    }
+        str3DefNoteD.play();
+        setTimeout(function () {
+          str3DefNoteD.pause();
+          str3DefNoteD.currentTime = 0;
+        }, 1100);
+        if (e.name != 'Click') {
+          e.name = "Click";
+          line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+        }
+        else if (e.name == 'Click') {
+          e.name = "Unclick";
+          line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+        }
+        break;
 
-    //When click it again..
-    else if (e.name == 'Click') {
-      e.name = "Unclick";
-      line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
-      str3DefNoteD.currentTime = 0;
-      str3DefNoteD.play();
-      setTimeout(function () {
-        str3DefNoteD.pause();
-        str3DefNoteD.currentTime = 0;
-      }, 1100);
-    }
-  }
-
-  function btn4Click(e) {
-    //First time click
-    if (e.name != 'Click') {
-      e.name = "Click";
-      line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-      str4DefNoteG.currentTime = 0;
-      str4DefNoteG.play();
-      setTimeout(function () {
-        str4DefNoteG.pause();
+      case (4):
         str4DefNoteG.currentTime = 0;
-      }, 1100);
-    }
+        str4DefNoteG.play();
+        setTimeout(function () {
+          str4DefNoteG.pause();
+          str4DefNoteG.currentTime = 0;
+        }, 1100);
+        if (e.name != 'Click') {
+          e.name = "Click";
+          line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+        }
+        else if (e.name == 'Click') {
+          e.name = "Unclick";
+          line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+        }
+        break;
 
-    //When click it again..
-    else if (e.name == 'Click') {
-      e.name = "Unclick";
-      line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
-      str4DefNoteG.currentTime = 0;
-      str4DefNoteG.play();
-      setTimeout(function () {
-        str4DefNoteG.pause();
-        str4DefNoteG.currentTime = 0;
-      }, 1100);
+      case (5):
+        str5DefNoteB.currentTime = 0;
+        str5DefNoteB.play();
+        setTimeout(function () {
+          str5DefNoteB.pause();
+          str5DefNoteB.currentTime = 0;
+        }, 1100);
+        if (e.name != 'Click') {
+          e.name = "Click";
+          line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+        }
+        else if (e.name == 'Click') {
+          e.name = "Unclick";
+          line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+        }
+        break;
+
+      case (6):
+        str6DefNoteEHeavy.currentTime = 0;
+        str6DefNoteEHeavy.play();
+        setTimeout(function () {
+          str6DefNoteEHeavy.pause();
+          str6DefNoteEHeavy.currentTime = 0;
+        }, 1100);
+        if (e.name != 'Click') {
+          e.name = "Click";
+          line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+        }
+        else if (e.name == 'Click') {
+          e.name = "Unclick";
+          line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
+        }
+        break;
+
+      default:
+        break;
     }
   }
 
-  function btn5Click(e) {
-    //First time click
-    if (e.name != 'Click') {
-      e.name = "Click";
-      line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-      str5DefNoteB.currentTime = 0;
-      str5DefNoteB.play();
-      setTimeout(function () {
-        str5DefNoteB.pause();
-        str5DefNoteB.currentTime = 0;
-      }, 1100);
-    }
+  async function playAllStrings() {
+    // if (isFromTop) {
+    const audioFiles = [
+      string6DefaultNoteEHeavy,
+      string5DefaultNoteB,
+      string4DefaultNoteG,
+      string3DefaultNoteD,
+      string2DefaultNoteA,
+      string1DefaultNoteESoft
+    ];
 
-    //When click it again..
-    else if (e.name == 'Click') {
-      e.name = "Unclick";
-      line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");   
-      str5DefNoteB.currentTime = 0;
-      str5DefNoteB.play();
-      setTimeout(function () {
-        str5DefNoteB.pause();
-        str5DefNoteB.currentTime = 0;
-      }, 1100);
-    }
-  }
+    // Preload the audio files
+    audioFiles.forEach(file => {
+      const audio = new Audio();
+      audio.src = file;
+      audio.load();
+    });
 
-  function btn6Click(e) {
-    //First time click
-    if (e.name != 'Click') {
-      e.name = "Click";
-      line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-      str6DefNoteEHeavy.currentTime = 0;
-      str6DefNoteEHeavy.play();
-      setTimeout(function () {
-        str6DefNoteEHeavy.pause();
-        str6DefNoteEHeavy.currentTime = 0;
-      }, 1100);
-    }
+    // Get a reference to the audio element
+    const audio = new Audio();
 
-    //When click it again..
-    else if (e.name == 'Click') {
-      e.name = "Unclick";
-      line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
-      str6DefNoteEHeavy.currentTime = 0;
-      str6DefNoteEHeavy.play();
-      setTimeout(function () {
-        str6DefNoteEHeavy.pause();
-        str6DefNoteEHeavy.currentTime = 0;
-      }, 1100);
-    }
+    // Define a variable to keep track of the current audio file index
+    let currentIndex = 0;
+
+    // } else {
+    //   const audioFiles = [
+    //     string1DefaultNoteESoft,
+    //     string2DefaultNoteA,
+    //     string3DefaultNoteD,
+    //     string4DefaultNoteG,
+    //     string5DefaultNoteB,
+    //     string6DefaultNoteEHeavy
+    //   ];
+
+    //   const audio = new Audio();
+
+    //   for (let i = 0; i < audioFiles.length; i++) {
+    //     // Set the source of the audio element
+    //     audio.src = audioFiles[i];
+    //     // Play the audio
+    //     audio.play();
+    //     // Wait for the audio to finish playing before moving on to the next one
+    //     await new Promise(resolve => audio.addEventListener('ended', resolve));
+    //   }
+    // }
   }
   //==============================
 
@@ -228,6 +325,7 @@ $(document).ready(function () {
       ltr === 1 && (i += 1);
       ltr === -1 && (i -= 1);
       line.setAttribute("transform", "rotate(" + i + ", 100, 100)");
+      console.log(i);
       playTone(i);
       i >= maxAngle && (ltr = -1);
       i === baseAngle && (ltr = 1);
@@ -282,6 +380,7 @@ $(document).ready(function () {
     switch (true) {
 
       case (currentAngle === 167):
+        console.log(currentAngle);
         str6DefNoteEHeavy.currentTime = 0;
         str6DefNoteEHeavy.play();
         setTimeout(function () {
@@ -291,6 +390,7 @@ $(document).ready(function () {
         break;
 
       case (currentAngle === 172):
+        console.log(currentAngle);
         str5DefNoteB.currentTime = 0;
         str5DefNoteB.play();
         setTimeout(function () {
@@ -300,6 +400,7 @@ $(document).ready(function () {
         break;
 
       case (currentAngle === 176):
+        console.log(currentAngle);
         str4DefNoteG.currentTime = 0;
         str4DefNoteG.play();
         setTimeout(function () {
@@ -309,6 +410,7 @@ $(document).ready(function () {
         break;
 
       case (currentAngle === 180):
+        console.log(currentAngle);
         str3DefNoteD.currentTime = 0;
         str3DefNoteD.play();
         setTimeout(function () {
@@ -318,6 +420,7 @@ $(document).ready(function () {
         break;
 
       case (currentAngle === 185):
+        console.log(currentAngle);
         str2DefNoteA.currentTime = 0;
         str2DefNoteA.play();
         setTimeout(function () {
@@ -327,6 +430,7 @@ $(document).ready(function () {
         break;
 
       case (currentAngle === 190):
+        console.log(currentAngle);
         str1DefNoteESoft.currentTime = 0;
         str1DefNoteESoft.play();
         setTimeout(function () {
