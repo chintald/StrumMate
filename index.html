@@ -12,9 +12,9 @@
 <body>
   <div class="guitar" id="guitar">
     <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; margin-top: 25px;">
-      <line id="line" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red">
+      <line id="line" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" style="visibility: hidden;">
       </line>
-      <line id="line1" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
+      <line id="line1" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red">
       </line>
       <line id="line2" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
       </line>
@@ -23,6 +23,8 @@
       <line id="line4" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
       </line>
       <line id="line5" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
+      </line>
+      <line id="line6" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red" >
       </line>
     </svg>
     
@@ -41,7 +43,7 @@
   </div>
 
   <div id="inputBtns">
-    <button id="btn1" class="button">Str 1</button>
+    <button id="btn1" onclick="btn1Click()" class="button">Str 1</button>
     <button id="btn2" class="button">Str 2</button>
     <button id="btn3" class="button">Str 3</button>
     <button id="btn4" class="button">Str 4</button>
