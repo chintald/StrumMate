@@ -23,12 +23,12 @@ $(document).ready(function () {
   // Code for Music
 
   const defaultPath = "D:\\MAC\\Sem 1\\ASE\\strummate\\steel_string_guitar_sounds";
-  const string6DefaultNoteEHeavy = (defaultPath + '\\E3_default_up.mp3');
-  const string5DefaultNoteB = (defaultPath + '\\B3_default.mp3');
-  const string4DefaultNoteG = (defaultPath + '\\G3_default.mp3');
-  const string3DefaultNoteD = (defaultPath + '\\D3_default.mp3');
-  const string2DefaultNoteA = (defaultPath + '\\A2_default.mp3');
-  const string1DefaultNoteESoft = (defaultPath + '\\Eb4_default_down.mp3');
+  const string6DefaultNoteEHeavy = (defaultPath + '\\E3_default_up_cut.mp3');
+  const string5DefaultNoteB = (defaultPath + '\\B3_default_cut.mp3');
+  const string4DefaultNoteG = (defaultPath + '\\G3_default_cut.mp3');
+  const string3DefaultNoteD = (defaultPath + '\\D3_default_cut.mp3');
+  const string2DefaultNoteA = (defaultPath + '\\A2_default_cut.mp3');
+  const string1DefaultNoteESoft = (defaultPath + '\\Eb4_default_down_cut.mp3');
 
 
   var str1DefNoteESoft = new Audio(string1DefaultNoteESoft);
@@ -49,6 +49,8 @@ $(document).ready(function () {
   const btn4 = document.getElementById("btn4");
   const btn5 = document.getElementById("btn5");
   const btn6 = document.getElementById("btn6");
+  const btn7 = document.getElementById("btn7");
+  const btn8 = document.getElementById("btn8");
 
 
   //============================== Milestone 3 code=================
@@ -60,18 +62,27 @@ $(document).ready(function () {
   btn4.onclick = function () { playSingleTone(this, 4) };
   btn5.onclick = function () { playSingleTone(this, 5) };
   btn6.onclick = function () { playSingleTone(this, 6) };
+
+  btn7.name = "Top";
+
+  //set initial position
   btn7.onclick = function () {
     if (isFromTop) {
-      btn7.value = "Bottom";
       isFromTop = false;
+      btn7.name = "Top";
     } else {
-      btn7.value = "Top";
       isFromTop = true;
+      btn7.name = "Bottom";
     }
   }
+
+  //Play all strings
   btn8.onclick = function () {
+    currentIndex = 0;
     playAudio();
   }
+
+  var strDir = 1;
 
   var audioFiles = [];
   if (isFromTop) {
@@ -108,6 +119,11 @@ $(document).ready(function () {
 
   // Define a function to play the audio
   function playAudio() {
+    // console.log(sliderVal, currentIndex);
+    // if (sliderVal == 0) {
+    //   audio.pause();
+    //   return;
+    // }
     // If all audio files have been played, stop playing
     if (currentIndex >= audioFiles.length) {
       return;
@@ -116,35 +132,161 @@ $(document).ready(function () {
     // Set the source of the audio element
     audio.src = audioFiles[currentIndex];
 
-    // line angle change
-    switch (currentIndex) {
-      case 0:
-        line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-        break;
-      case 1:
-        line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-        break;
-      case 2:
-        line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-        break;
-      case 3:
-        line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-        break;
-      case 4:
-        line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-        break;
-      case 5:
-        line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-        break;
+    if (isFromTop) {
+      if (strDir === 1) {
+        // line angle change
+        switch (currentIndex) {
+          case 0:
+            line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
+            // if (sliderVal == 1) {
+            //   strDir = 0;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 1:
+            line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+            // if (sliderVal == 2) {
+            //   strDir = 0;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 2:
+            line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+            // if (sliderVal == 3) {
+            //   strDir = 0;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 3:
+            line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+            // if (sliderVal == 4) {
+            //   strDir = 0;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 4:
+            line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+            // if (sliderVal == 5) {
+            //   strDir = 0;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 5:
+            line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+            // if (sliderVal == 6) {
+            //   strDir = 0;
+            //   currentIndex = -1;
+            // }
+            strDir = 0;
+            break;
+        }
+      }
+      //When click it again..
+      else if (strDir === 0) {
+        // line angle change
+        switch (currentIndex) {
+          case 0:
+            line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+            // if (sliderVal == 1) {
+            //   strDir = 1;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 1:
+            line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+            // if (sliderVal == 2) {
+            //   strDir = 1;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 2:
+            line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+            // if (sliderVal == 3) {
+            //   strDir = 1;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 3:
+            line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+            // if (sliderVal == 4) {
+            //   strDir = 1;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 4:
+            line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+            // if (sliderVal == 5) {
+            //   strDir = 1;
+            //   currentIndex = -1;
+            // }
+            break;
+          case 5:
+            line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
+            // if (sliderVal == 6) {
+            //   strDir = 1;
+            //   currentIndex = -1;
+            // }
+            strDir = 1;
+            break;
+        }
+      }
+
+    } else {
+      //First time click
+      if (strDir === 1) {
+        // line angle change
+        switch (currentIndex) {
+          case 0:
+            line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+            break;
+          case 1:
+            line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+            break;
+          case 2:
+            line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+            break;
+          case 3:
+            line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+            break;
+          case 4:
+            line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+            break;
+          case 5:
+            line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
+            strDir = 0;
+            break;
+        }
+      }
+      //When click it again..
+      else if (strDir === 0) {
+        // line angle change
+        switch (currentIndex) {
+          case 0:
+            line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
+            break;
+          case 1:
+            line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+            break;
+          case 2:
+            line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+            break;
+          case 3:
+            line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+            break;
+          case 4:
+            line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+            break;
+          case 5:
+            line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+            strDir = 1;
+            break;
+        }
+      }
     }
 
+    // audio.pause();
     // Play the audio
-    audio.currentTime = 0;
     audio.play();
-    setTimeout(function () {
-      audio.pause;
-      audio.currentTime = 0;
-    }, 1100);
 
     // Increment the current index
     currentIndex++;
@@ -264,53 +406,6 @@ $(document).ready(function () {
         break;
     }
   }
-
-  async function playAllStrings() {
-    // if (isFromTop) {
-    const audioFiles = [
-      string6DefaultNoteEHeavy,
-      string5DefaultNoteB,
-      string4DefaultNoteG,
-      string3DefaultNoteD,
-      string2DefaultNoteA,
-      string1DefaultNoteESoft
-    ];
-
-    // Preload the audio files
-    audioFiles.forEach(file => {
-      const audio = new Audio();
-      audio.src = file;
-      audio.load();
-    });
-
-    // Get a reference to the audio element
-    const audio = new Audio();
-
-    // Define a variable to keep track of the current audio file index
-    let currentIndex = 0;
-
-    // } else {
-    //   const audioFiles = [
-    //     string1DefaultNoteESoft,
-    //     string2DefaultNoteA,
-    //     string3DefaultNoteD,
-    //     string4DefaultNoteG,
-    //     string5DefaultNoteB,
-    //     string6DefaultNoteEHeavy
-    //   ];
-
-    //   const audio = new Audio();
-
-    //   for (let i = 0; i < audioFiles.length; i++) {
-    //     // Set the source of the audio element
-    //     audio.src = audioFiles[i];
-    //     // Play the audio
-    //     audio.play();
-    //     // Wait for the audio to finish playing before moving on to the next one
-    //     await new Promise(resolve => audio.addEventListener('ended', resolve));
-    //   }
-    // }
-  }
   //==============================
 
   var i = 160;
@@ -367,7 +462,9 @@ $(document).ready(function () {
 
   slider1.addEventListener("input", function () {
     slider1Val = this.value;
-    sliderFunc(slider1Val, slider2Val);
+    currentIndex = 0;
+    playAudio(slider1Val);
+    // sliderFunc(slider1Val, slider2Val);
   });
 
   slider2.addEventListener("input", function () {
