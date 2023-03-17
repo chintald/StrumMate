@@ -41,8 +41,6 @@ $(document).ready(function () {
 
   const slider1 = document.getElementById("slider1");
   const slider2 = document.getElementById("slider2");
-  const slider1Value = $('.slider1-range-value');
-  const slider2Value = $('.slider2-range-value');
   const btn1 = document.getElementById("btn1");
   const btn2 = document.getElementById("btn2");
   const btn3 = document.getElementById("btn3");
@@ -52,9 +50,16 @@ $(document).ready(function () {
   const btn7 = document.getElementById("btn7");
   const btn8 = document.getElementById("btn8");
 
-
-  //============================== Milestone 3 code=================
   var isFromTop = true;
+  let interval = 1000;
+  btn7.name = "Top";
+  var strDir = 1;
+  var audioFiles = [];
+  // Get a reference to the audio element
+  const audio = new Audio();
+  // Define a variable to keep track of the current audio file index
+  let currentIndex = 0;
+  let sliderVal = 0;
 
   btn1.onclick = function () { playSingleTone(this, 1) };
   btn2.onclick = function () { playSingleTone(this, 2) };
@@ -63,28 +68,24 @@ $(document).ready(function () {
   btn5.onclick = function () { playSingleTone(this, 5) };
   btn6.onclick = function () { playSingleTone(this, 6) };
 
-  btn7.name = "Top";
-
   //set initial position
   btn7.onclick = function () {
     if (isFromTop) {
       isFromTop = false;
       btn7.name = "Top";
+      strDir = 1;
+      nTimer && clearInterval(nTimer);
+      setNewTimer(interval);
+
     } else {
       isFromTop = true;
       btn7.name = "Bottom";
+      strDir = 1;
+      nTimer && clearInterval(nTimer);
+      setNewTimer(interval);
     }
   }
 
-  //Play all strings
-  btn8.onclick = function () {
-    currentIndex = 0;
-    playAudio();
-  }
-
-  var strDir = 1;
-
-  var audioFiles = [];
   if (isFromTop) {
     audioFiles = [
       string1DefaultNoteESoft,
@@ -111,31 +112,33 @@ $(document).ready(function () {
     audio.load();
   });
 
-  // Get a reference to the audio element
-  const audio = new Audio();
-
-  // Define a variable to keep track of the current audio file index
-  let currentIndex = 0;
-
-  let sliderVal = 0;
-  // Define a function to play the audio
-  function playAudio() {
-    // console.log(sliderVal, currentIndex);
-    if (sliderVal == 0) {
-      audio.pause();
+  //Slider listeners
+  slider1.addEventListener("input", function () {
+    sliderVal = this.value;
+    if (this.value == 0) {
+      resetLines();
       currentIndex = 0;
       strDir = 1;
-      resetLines();
-      return;
+      nTimer && clearInterval(nTimer);
+    } else {
+      nTimer && clearInterval(nTimer);
+      setNewTimer(interval);
     }
-    // If all audio files have been played, stop playing
-    if (currentIndex >= audioFiles.length) {
-      return;
-    }
+  });
+
+  slider2.addEventListener("input", function () {
+    interval = this.value;
+    nTimer && clearInterval(nTimer);
+    setNewTimer(this.value);
+  });
+
+  // Define a function to play the audio
+  function playAudio() {
 
     // Set the source of the audio element
     audio.src = audioFiles[currentIndex];
 
+    console.log(currentIndex);
     if (isFromTop) {
       if (strDir === 1) {
         // line angle change
@@ -144,42 +147,56 @@ $(document).ready(function () {
             line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
             if (sliderVal == 6) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 1:
             line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
             if (sliderVal == 5) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 2:
             line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
             if (sliderVal == 4) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+              currentIndex++;
             }
             break;
           case 3:
             line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
             if (sliderVal == 3) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+              currentIndex++;
             }
             break;
           case 4:
             line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
             if (sliderVal == 2) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+              currentIndex++;
             }
             break;
           case 5:
             line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
             if (sliderVal == 1) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+              currentIndex = 0;
             }
             break;
         }
@@ -192,42 +209,59 @@ $(document).ready(function () {
             line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
             if (sliderVal == 6) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 1:
             line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
             if (sliderVal == 5) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 2:
             line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
             if (sliderVal == 4) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 3:
             line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
             if (sliderVal == 3) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 4:
             line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
             if (sliderVal == 2) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 5:
             line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
             if (sliderVal == 1) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+              currentIndex = 0;
             }
             break;
         }
@@ -242,42 +276,59 @@ $(document).ready(function () {
             line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
             if (sliderVal == 6) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 1:
             line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
             if (sliderVal == 5) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 2:
             line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
             if (sliderVal == 4) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 3:
             line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
             if (sliderVal == 3) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 4:
             line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
             if (sliderVal == 2) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 5:
             line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
             if (sliderVal == 1) {
               strDir = 0;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+              currentIndex = 0;
             }
             break;
         }
@@ -290,42 +341,59 @@ $(document).ready(function () {
             line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
             if (sliderVal == 6) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 1:
             line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
             if (sliderVal == 5) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 2:
             line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
             if (sliderVal == 4) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 3:
             line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
             if (sliderVal == 3) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 4:
             line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
             if (sliderVal == 2) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+
+              currentIndex++;
             }
             break;
           case 5:
             line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
             if (sliderVal == 1) {
               strDir = 1;
-              currentIndex = -1;
+              currentIndex = 0;
+            } else {
+              currentIndex = 0;
             }
             break;
         }
@@ -334,12 +402,6 @@ $(document).ready(function () {
 
     // Play the audio
     audio.play();
-
-    // Increment the current index
-    currentIndex++;
-
-    // Set up an event listener to play the next audio file when the current one has ended
-    audio.addEventListener('ended', playAudio);
   }
 
   function resetLines() {
@@ -351,6 +413,7 @@ $(document).ready(function () {
     line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
   }
 
+  //Play individual string
   function playSingleTone(e, strNum) {
     switch (strNum) {
 
@@ -462,143 +525,14 @@ $(document).ready(function () {
         break;
     }
   }
-  //==============================
 
-  var i = 160;
-  var baseAngle = 160;
-  var ltr = 1;
-  var timer = null;
+  var nTimer = null;
 
-  const setTimer = (maxAngle, timeInterval) => {
-    i >= maxAngle && (ltr = -1);
-    i === baseAngle && (ltr = 1);
-    timer = setInterval(function () {
-      ltr === 1 && (i += 1);
-      ltr === -1 && (i -= 1);
-      line.setAttribute("transform", "rotate(" + i + ", 100, 100)");
-      console.log(i);
-      playTone(i);
-      i >= maxAngle && (ltr = -1);
-      i === baseAngle && (ltr = 1);
-    }, timeInterval);
-  }
-
-  const clearTimer = (isStop = false) => {
-    timer && clearInterval(timer);
-    timer = null;
-    if (isStop) {
-      i = baseAngle
-      ltr = 1;
-      line.setAttribute("transform", "rotate(" + baseAngle + ", 100, 100)");
-    }
-  }
-
-  var slider1Val = 0;
-  var slider2Val = 25;
-
-  const sliderFunc = (sliderVal, timeInterval) => {
-    switch (true) {
-      case (sliderVal > 0 && sliderVal <= 340):
-        clearTimer();
-        timer === null && setTimer(172, timeInterval);
-        break;
-      case (sliderVal >= 341 && sliderVal <= 680):
-        clearTimer();
-        timer === null && setTimer(184, timeInterval)
-        break;
-      case (sliderVal >= 681 && sliderVal <= 1023):
-        clearTimer();
-        timer === null && setTimer(196, timeInterval);
-        break;
-      default:
-        clearTimer(true);
-        break;
-    }
-  }
-
-  slider1.addEventListener("input", function () {
-    slider1Val = this.value;
-    sliderVal = this.value;
-    // currentIndex = 0;
-    audio.pause();
-    currentIndex = 0;
-    strDir = 1;
-    resetLines();
-    playAudio();
-    // sliderFunc(slider1Val, slider2Val);
-  });
-
-  slider2.addEventListener("input", function () {
-    slider2Val = this.value;
-    sliderFunc(slider1Val, slider2Val);
-  });
-
-
-  function playTone(currentAngle) {
-    switch (true) {
-
-      case (currentAngle === 167):
-        console.log(currentAngle);
-        str6DefNoteEHeavy.currentTime = 0;
-        str6DefNoteEHeavy.play();
-        setTimeout(function () {
-          str6DefNoteEHeavy.pause();
-          str6DefNoteEHeavy.currentTime = 0;
-        }, 1100);
-        break;
-
-      case (currentAngle === 172):
-        console.log(currentAngle);
-        str5DefNoteB.currentTime = 0;
-        str5DefNoteB.play();
-        setTimeout(function () {
-          str5DefNoteB.pause();
-          str5DefNoteB.currentTime = 0;
-        }, 1100);
-        break;
-
-      case (currentAngle === 176):
-        console.log(currentAngle);
-        str4DefNoteG.currentTime = 0;
-        str4DefNoteG.play();
-        setTimeout(function () {
-          str4DefNoteG.pause();
-          str4DefNoteG.currentTime = 0;
-        }, 1100);
-        break;
-
-      case (currentAngle === 180):
-        console.log(currentAngle);
-        str3DefNoteD.currentTime = 0;
-        str3DefNoteD.play();
-        setTimeout(function () {
-          str3DefNoteD.pause();
-          str3DefNoteD.currentTime = 0;
-        }, 1100);
-        break;
-
-      case (currentAngle === 185):
-        console.log(currentAngle);
-        str2DefNoteA.currentTime = 0;
-        str2DefNoteA.play();
-        setTimeout(function () {
-          str2DefNoteA.pause();
-          str2DefNoteA.currentTime = 0;
-        }, 1100);
-        break;
-
-      case (currentAngle === 190):
-        console.log(currentAngle);
-        str1DefNoteESoft.currentTime = 0;
-        str1DefNoteESoft.play();
-        setTimeout(function () {
-          str1DefNoteESoft.pause();
-          str1DefNoteESoft.currentTime = 0;
-        }, 1100);
-        break;
-
-      default:
-        break;
+  const setNewTimer = (value = 1000) => {
+    if (Number(sliderVal) > 0) {
+      nTimer = setInterval(function () {
+        playAudio();
+      }, value)
     }
   }
 });   // Document Ends
