@@ -22,7 +22,7 @@ $(document).ready(function () {
 
   // Code for Music
 
-  const defaultPath = "D:\\MAC\\Sem 1\\ASE\\strummate\\steel_string_guitar_sounds";
+  const defaultPath = "C:\\Users\\chint\\OneDrive\\Desktop\\UWindsor\\ASE\\Prototype\\StrumMate\\steel_string_guitar_sounds";
   const string6DefaultNoteEHeavy = (defaultPath + '\\E3_default_up_cut.mp3');
   const string5DefaultNoteB = (defaultPath + '\\B3_default_cut.mp3');
   const string4DefaultNoteG = (defaultPath + '\\G3_default_cut.mp3');
