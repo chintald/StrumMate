@@ -148,8 +148,10 @@ $(document).ready(function () {
             if (sliderVal == 6) {
               strDir = 0;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 6) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -158,8 +160,10 @@ $(document).ready(function () {
             if (sliderVal == 5) {
               strDir = 0;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 5) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -168,7 +172,10 @@ $(document).ready(function () {
             if (sliderVal == 4) {
               strDir = 0;
               currentIndex = 0;
-            } else {
+            } else if (sliderVal > 4) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -177,7 +184,10 @@ $(document).ready(function () {
             if (sliderVal == 3) {
               strDir = 0;
               currentIndex = 0;
-            } else {
+            } else if (sliderVal > 3) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -186,7 +196,10 @@ $(document).ready(function () {
             if (sliderVal == 2) {
               strDir = 0;
               currentIndex = 0;
-            } else {
+            } else if (sliderVal > 2) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -195,7 +208,10 @@ $(document).ready(function () {
             if (sliderVal == 1) {
               strDir = 0;
               currentIndex = 0;
-            } else {
+            } else if (sliderVal > 1) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex = 0;
             }
             break;
@@ -210,8 +226,10 @@ $(document).ready(function () {
             if (sliderVal == 6) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 6) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -220,8 +238,10 @@ $(document).ready(function () {
             if (sliderVal == 5) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 5) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -230,8 +250,10 @@ $(document).ready(function () {
             if (sliderVal == 4) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 4) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -240,8 +262,10 @@ $(document).ready(function () {
             if (sliderVal == 3) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 3) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -250,8 +274,10 @@ $(document).ready(function () {
             if (sliderVal == 2) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 2) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -260,7 +286,10 @@ $(document).ready(function () {
             if (sliderVal == 1) {
               strDir = 1;
               currentIndex = 0;
-            } else {
+            } else if (sliderVal > 1) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex = 0;
             }
             break;
@@ -277,8 +306,10 @@ $(document).ready(function () {
             if (sliderVal == 6) {
               strDir = 0;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 6) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -287,8 +318,10 @@ $(document).ready(function () {
             if (sliderVal == 5) {
               strDir = 0;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 5) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -297,8 +330,10 @@ $(document).ready(function () {
             if (sliderVal == 4) {
               strDir = 0;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 4) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -307,8 +342,10 @@ $(document).ready(function () {
             if (sliderVal == 3) {
               strDir = 0;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 3) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -317,8 +354,10 @@ $(document).ready(function () {
             if (sliderVal == 2) {
               strDir = 0;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 2) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -327,7 +366,10 @@ $(document).ready(function () {
             if (sliderVal == 1) {
               strDir = 0;
               currentIndex = 0;
-            } else {
+            } else if (sliderVal > 1) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex = 0;
             }
             break;
@@ -342,8 +384,10 @@ $(document).ready(function () {
             if (sliderVal == 6) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 6) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -352,7 +396,10 @@ $(document).ready(function () {
             if (sliderVal == 5) {
               strDir = 1;
               currentIndex = 0;
-            } else {
+            } else if (sliderVal > 5) {
+              currentIndex = 0;
+            }
+            else {
 
               currentIndex++;
             }
@@ -362,8 +409,10 @@ $(document).ready(function () {
             if (sliderVal == 4) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 4) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -372,8 +421,10 @@ $(document).ready(function () {
             if (sliderVal == 3) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 3) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -382,8 +433,10 @@ $(document).ready(function () {
             if (sliderVal == 2) {
               strDir = 1;
               currentIndex = 0;
-            } else {
-
+            } else if (sliderVal > 2) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex++;
             }
             break;
@@ -392,7 +445,10 @@ $(document).ready(function () {
             if (sliderVal == 1) {
               strDir = 1;
               currentIndex = 0;
-            } else {
+            } else if (sliderVal > 1) {
+              currentIndex = 0;
+            }
+            else {
               currentIndex = 0;
             }
             break;
