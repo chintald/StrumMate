@@ -22,22 +22,21 @@ $(document).ready(function () {
 
   // Code for Music
 
-  const defaultPath = "C:\\Users\\chint\\OneDrive\\Desktop\\UWindsor\\ASE\\Prototype\\StrumMate\\steel_string_guitar_sounds";
-  const string6DefaultNoteEHeavy = (defaultPath + '\\E3_default_up_cut.mp3');
-  const string5DefaultNoteB = (defaultPath + '\\B3_default_cut.mp3');
-  const string4DefaultNoteG = (defaultPath + '\\G3_default_cut.mp3');
-  const string3DefaultNoteD = (defaultPath + '\\D3_default_cut.mp3');
-  const string2DefaultNoteA = (defaultPath + '\\A2_default_cut.mp3');
-  const string1DefaultNoteESoft = (defaultPath + '\\Eb4_default_down_cut.mp3');
-
+  const defaultPath =
+    "C:\\Users\\chint\\OneDrive\\Desktop\\UWindsor\\ASE\\Prototype\\StrumMate\\steel_string_guitar_sounds";
+  const string6DefaultNoteEHeavy = defaultPath + "\\E3_default_up_cut.mp3";
+  const string5DefaultNoteA = defaultPath + "\\A2_default_cut.mp3";
+  const string4DefaultNoteD = defaultPath + "\\D3_default_cut.mp3";
+  const string3DefaultNoteG = defaultPath + "\\G3_default_cut.mp3";
+  const string2DefaultNoteB = defaultPath + "\\B3_default_cut.mp3";
+  const string1DefaultNoteESoft = defaultPath + "\\Eb4_default_down_cut.mp3";
 
   var str1DefNoteESoft = new Audio(string1DefaultNoteESoft);
-  var str2DefNoteA = new Audio(string2DefaultNoteA);
-  var str3DefNoteD = new Audio(string3DefaultNoteD);
-  var str4DefNoteG = new Audio(string4DefaultNoteG);
-  var str5DefNoteB = new Audio(string5DefaultNoteB);
+  var str2DefNoteB = new Audio(string2DefaultNoteB);
+  var str3DefNoteG = new Audio(string3DefaultNoteG);
+  var str4DefNoteD = new Audio(string4DefaultNoteD);
+  var str5DefNoteA = new Audio(string5DefaultNoteA);
   var str6DefNoteEHeavy = new Audio(string6DefaultNoteEHeavy);
-
 
   const slider1 = document.getElementById("slider1");
   const slider2 = document.getElementById("slider2");
@@ -61,12 +60,24 @@ $(document).ready(function () {
   let currentIndex = 0;
   let sliderVal = 0;
 
-  btn1.onclick = function () { playSingleTone(this, 1) };
-  btn2.onclick = function () { playSingleTone(this, 2) };
-  btn3.onclick = function () { playSingleTone(this, 3) };
-  btn4.onclick = function () { playSingleTone(this, 4) };
-  btn5.onclick = function () { playSingleTone(this, 5) };
-  btn6.onclick = function () { playSingleTone(this, 6) };
+  btn1.onclick = function () {
+    playSingleTone(this, 1);
+  };
+  btn2.onclick = function () {
+    playSingleTone(this, 2);
+  };
+  btn3.onclick = function () {
+    playSingleTone(this, 3);
+  };
+  btn4.onclick = function () {
+    playSingleTone(this, 4);
+  };
+  btn5.onclick = function () {
+    playSingleTone(this, 5);
+  };
+  btn6.onclick = function () {
+    playSingleTone(this, 6);
+  };
 
   //set initial position
   btn7.onclick = function () {
@@ -76,7 +87,6 @@ $(document).ready(function () {
       strDir = 1;
       nTimer && clearInterval(nTimer);
       setNewTimer(interval);
-
     } else {
       isFromTop = true;
       btn7.name = "Bottom";
@@ -84,29 +94,19 @@ $(document).ready(function () {
       nTimer && clearInterval(nTimer);
       setNewTimer(interval);
     }
-  }
+  };
 
-  if (isFromTop) {
-    audioFiles = [
-      string1DefaultNoteESoft,
-      string2DefaultNoteA,
-      string3DefaultNoteD,
-      string4DefaultNoteG,
-      string5DefaultNoteB,
-      string6DefaultNoteEHeavy,
-    ];
-  } else {
-    audioFiles = [
-      string6DefaultNoteEHeavy,
-      string5DefaultNoteB,
-      string4DefaultNoteG,
-      string3DefaultNoteD,
-      string2DefaultNoteA,
-      string1DefaultNoteESoft
-    ];
-  }
+  // audioFiles = [
+  //   string6DefaultNoteEHeavy,
+  //   string5DefaultNoteA,
+  //   string4DefaultNoteD,
+  //   string3DefaultNoteG,
+  //   string2DefaultNoteB,
+  //   string1DefaultNoteESoft
+  // ];
+
   // Preload the audio files
-  audioFiles.forEach(file => {
+  audioFiles.forEach((file) => {
     const audio = new Audio();
     audio.src = file;
     audio.load();
@@ -134,11 +134,28 @@ $(document).ready(function () {
 
   // Define a function to play the audio
   function playAudio() {
+    if (isFromTop) {
+      audioFiles = [
+        string6DefaultNoteEHeavy,
+        string5DefaultNoteA,
+        string4DefaultNoteD,
+        string3DefaultNoteG,
+        string2DefaultNoteB,
+        string1DefaultNoteESoft,
+      ];
+    } else {
+      audioFiles = [
+        string1DefaultNoteESoft,
+        string2DefaultNoteB,
+        string3DefaultNoteG,
+        string4DefaultNoteD,
+        string5DefaultNoteA,
+        string6DefaultNoteEHeavy,
+      ];
+    }
 
     // Set the source of the audio element
     audio.src = audioFiles[currentIndex];
-
-    console.log(currentIndex);
     if (isFromTop) {
       if (strDir === 1) {
         // line angle change
@@ -150,8 +167,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 6) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -162,8 +178,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 5) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -174,8 +189,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 4) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -186,8 +200,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 3) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -198,8 +211,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 2) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -210,8 +222,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 1) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex = 0;
             }
             break;
@@ -228,8 +239,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 6) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -240,8 +250,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 5) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -252,8 +261,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 4) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -264,8 +272,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 3) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -276,8 +283,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 2) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -288,14 +294,12 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 1) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex = 0;
             }
             break;
         }
       }
-
     } else {
       //First time click
       if (strDir === 1) {
@@ -308,8 +312,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 6) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -320,8 +323,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 5) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -332,8 +334,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 4) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -344,8 +345,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 3) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -356,8 +356,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 2) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -368,8 +367,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 1) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex = 0;
             }
             break;
@@ -386,8 +384,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 6) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -398,9 +395,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 5) {
               currentIndex = 0;
-            }
-            else {
-
+            } else {
               currentIndex++;
             }
             break;
@@ -411,8 +406,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 4) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -423,8 +417,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 3) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -435,8 +428,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 2) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex++;
             }
             break;
@@ -447,8 +439,7 @@ $(document).ready(function () {
               currentIndex = 0;
             } else if (sliderVal > 1) {
               currentIndex = 0;
-            }
-            else {
+            } else {
               currentIndex = 0;
             }
             break;
@@ -472,17 +463,96 @@ $(document).ready(function () {
   //Play individual string
   function playSingleTone(e, strNum) {
     switch (strNum) {
-
-      case (1):
+      case 1:
         //First time click
-        if (e.name != 'Click') {
+        if (e.name != "Click") {
           e.name = "Click";
           line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
         }
         //When click it again..
-        else if (e.name == 'Click') {
-          e.name = "Unclick";
+        else if (e.name == "Click") {
+          e.name = "Un  click";
           line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+        }
+        str6DefNoteEHeavy.currentTime = 0;
+        str6DefNoteEHeavy.play();
+        setTimeout(function () {
+          str6DefNoteEHeavy.pause();
+          str6DefNoteEHeavy.currentTime = 0;
+        }, 1100);
+        break;
+
+      case 2:
+        if (e.name != "Click") {
+          e.name = "Click";
+          line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+        } else if (e.name == "Click") {
+          e.name = "Unclick";
+          line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+        }
+        str5DefNoteA.currentTime = 0;
+        str5DefNoteA.play();
+        setTimeout(function () {
+          str5DefNoteA.pause();
+          str5DefNoteA.currentTime = 0;
+        }, 1100);
+        break;
+
+      case 3:
+        if (e.name != "Click") {
+          e.name = "Click";
+          line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+        } else if (e.name == "Click") {
+          e.name = "Unclick";
+          line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+        }
+        str4DefNoteD.currentTime = 0;
+        str4DefNoteD.play();
+        setTimeout(function () {
+          str4DefNoteD.pause();
+          str4DefNoteD.currentTime = 0;
+        }, 1100);
+        break;
+
+      case 4:
+        if (e.name != "Click") {
+          e.name = "Click";
+          line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+        } else if (e.name == "Click") {
+          e.name = "Unclick";
+          line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+        }
+        str3DefNoteG.currentTime = 0;
+        str3DefNoteG.play();
+        setTimeout(function () {
+          str3DefNoteG.pause();
+          str3DefNoteG.currentTime = 0;
+        }, 1100);
+        break;
+
+      case 5:
+        if (e.name != "Click") {
+          e.name = "Click";
+          line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+        } else if (e.name == "Click") {
+          e.name = "Unclick";
+          line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+        }
+        str2DefNoteB.currentTime = 0;
+        str2DefNoteB.play();
+        setTimeout(function () {
+          str2DefNoteB.pause();
+          str2DefNoteB.currentTime = 0;
+        }, 1100);
+        break;
+
+      case 6:
+        if (e.name != "Click") {
+          e.name = "Click";
+          line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+        } else if (e.name == "Click") {
+          e.name = "Unclick";
+          line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
         }
         str1DefNoteESoft.currentTime = 0;
         str1DefNoteESoft.play();
@@ -490,91 +560,6 @@ $(document).ready(function () {
           str1DefNoteESoft.pause();
           str1DefNoteESoft.currentTime = 0;
         }, 1100);
-        break;
-
-      case (2):
-        if (e.name != 'Click') {
-          e.name = "Click";
-          line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-        }
-        else if (e.name == 'Click') {
-          e.name = "Unclick";
-          line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
-        }
-        str2DefNoteA.currentTime = 0;
-        str2DefNoteA.play();
-        setTimeout(function () {
-          str2DefNoteA.pause();
-          str2DefNoteA.currentTime = 0;
-        }, 1100);
-        break;
-
-      case (3):
-        str3DefNoteD.currentTime = 0;
-        str3DefNoteD.play();
-        setTimeout(function () {
-          str3DefNoteD.pause();
-          str3DefNoteD.currentTime = 0;
-        }, 1100);
-        if (e.name != 'Click') {
-          e.name = "Click";
-          line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-        }
-        else if (e.name == 'Click') {
-          e.name = "Unclick";
-          line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
-        }
-        break;
-
-      case (4):
-        str4DefNoteG.currentTime = 0;
-        str4DefNoteG.play();
-        setTimeout(function () {
-          str4DefNoteG.pause();
-          str4DefNoteG.currentTime = 0;
-        }, 1100);
-        if (e.name != 'Click') {
-          e.name = "Click";
-          line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-        }
-        else if (e.name == 'Click') {
-          e.name = "Unclick";
-          line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
-        }
-        break;
-
-      case (5):
-        str5DefNoteB.currentTime = 0;
-        str5DefNoteB.play();
-        setTimeout(function () {
-          str5DefNoteB.pause();
-          str5DefNoteB.currentTime = 0;
-        }, 1100);
-        if (e.name != 'Click') {
-          e.name = "Click";
-          line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-        }
-        else if (e.name == 'Click') {
-          e.name = "Unclick";
-          line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
-        }
-        break;
-
-      case (6):
-        str6DefNoteEHeavy.currentTime = 0;
-        str6DefNoteEHeavy.play();
-        setTimeout(function () {
-          str6DefNoteEHeavy.pause();
-          str6DefNoteEHeavy.currentTime = 0;
-        }, 1100);
-        if (e.name != 'Click') {
-          e.name = "Click";
-          line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-        }
-        else if (e.name == 'Click') {
-          e.name = "Unclick";
-          line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
-        }
         break;
 
       default:
@@ -585,10 +570,11 @@ $(document).ready(function () {
   var nTimer = null;
 
   const setNewTimer = (value = 1000) => {
+    console.log(value);
     if (Number(sliderVal) > 0) {
       nTimer = setInterval(function () {
         playAudio();
-      }, value)
+      }, value);
     }
-  }
-});   // Document Ends
+  };
+}); // Document Ends
