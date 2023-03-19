@@ -1,30 +1,28 @@
 $(document).ready(function () {
-  var line = document.getElementById("line");
+  let line = document.getElementById("line");
   line.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
 
-  var line1 = document.getElementById("line1");
+  let line1 = document.getElementById("line1");
   line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
 
-  var line2 = document.getElementById("line2");
+  let line2 = document.getElementById("line2");
   line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
 
-  var line3 = document.getElementById("line3");
+  let line3 = document.getElementById("line3");
   line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
 
-  var line4 = document.getElementById("line4");
+  let line4 = document.getElementById("line4");
   line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
 
-  var line5 = document.getElementById("line5");
+  let line5 = document.getElementById("line5");
   line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
 
-  var line6 = document.getElementById("line6");
+  let line6 = document.getElementById("line6");
   line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
 
+  let string_pos = [0, 0, 0, 0, 0, 0];
   // Code for Music
 
-  // const defaultPath =
-  //   "C:\\Users\\chint\\OneDrive\\Desktop\\UWindsor\\ASE\\Prototype\\StrumMate\\steel_string_guitar_sounds";
-  // for deployment
   const defaultPath = "steel_string_guitar_sounds";
   const string6DefaultNoteEHeavy = defaultPath + "\\E3_default_up_cut.mp3";
   const string5DefaultNoteA = defaultPath + "\\A2_default_cut.mp3";
@@ -33,12 +31,12 @@ $(document).ready(function () {
   const string2DefaultNoteB = defaultPath + "\\B3_default_cut.mp3";
   const string1DefaultNoteESoft = defaultPath + "\\Eb4_default_down_cut.mp3";
 
-  var str1DefNoteESoft = new Audio(string1DefaultNoteESoft);
-  var str2DefNoteB = new Audio(string2DefaultNoteB);
-  var str3DefNoteG = new Audio(string3DefaultNoteG);
-  var str4DefNoteD = new Audio(string4DefaultNoteD);
-  var str5DefNoteA = new Audio(string5DefaultNoteA);
-  var str6DefNoteEHeavy = new Audio(string6DefaultNoteEHeavy);
+  let str1DefNoteESoft = new Audio(string1DefaultNoteESoft);
+  let str2DefNoteB = new Audio(string2DefaultNoteB);
+  let str3DefNoteG = new Audio(string3DefaultNoteG);
+  let str4DefNoteD = new Audio(string4DefaultNoteD);
+  let str5DefNoteA = new Audio(string5DefaultNoteA);
+  let str6DefNoteEHeavy = new Audio(string6DefaultNoteEHeavy);
 
   const slider1 = document.getElementById("slider1");
   const slider2 = document.getElementById("slider2");
@@ -49,13 +47,10 @@ $(document).ready(function () {
   const btn5 = document.getElementById("btn5");
   const btn6 = document.getElementById("btn6");
   const btn7 = document.getElementById("btn7");
-  const btn8 = document.getElementById("btn8");
 
-  var isFromTop = true;
+  let isFromTop = true;
   let interval = 1000;
-  btn7.name = "Top";
-  var strDir = 1;
-  var audioFiles = [];
+  let audioFiles = [];
   // Get a reference to the audio element
   const audio = new Audio();
   // Define a variable to keep track of the current audio file index
@@ -63,49 +58,38 @@ $(document).ready(function () {
   let sliderVal = 0;
 
   btn1.onclick = function () {
-    playSingleTone(this, 1);
+    playSingleTone(1);
   };
   btn2.onclick = function () {
-    playSingleTone(this, 2);
+    playSingleTone(2);
   };
   btn3.onclick = function () {
-    playSingleTone(this, 3);
+    playSingleTone(3);
   };
   btn4.onclick = function () {
-    playSingleTone(this, 4);
+    playSingleTone(4);
   };
   btn5.onclick = function () {
-    playSingleTone(this, 5);
+    playSingleTone(5);
   };
   btn6.onclick = function () {
-    playSingleTone(this, 6);
+    playSingleTone(6);
   };
 
   //set initial position
   btn7.onclick = function () {
-    if (isFromTop) {
+    if (isFromTop === true) {
       isFromTop = false;
-      btn7.innerHTML = "Position: Top";
-      strDir = 1;
+      btn7.innerHTML = "Current Position: Bottom";
       nTimer && clearInterval(nTimer);
       setNewTimer(interval);
     } else {
       isFromTop = true;
-      btn7.innerHTML = "Position: Bottom";
-      strDir = 1;
+      btn7.innerHTML = "Current Position: Top";
       nTimer && clearInterval(nTimer);
       setNewTimer(interval);
     }
   };
-
-  // audioFiles = [
-  //   string6DefaultNoteEHeavy,
-  //   string5DefaultNoteA,
-  //   string4DefaultNoteD,
-  //   string3DefaultNoteG,
-  //   string2DefaultNoteB,
-  //   string1DefaultNoteESoft
-  // ];
 
   // Preload the audio files
   audioFiles.forEach((file) => {
@@ -118,9 +102,7 @@ $(document).ready(function () {
   slider1.addEventListener("input", function () {
     sliderVal = this.value;
     if (this.value == 0) {
-      resetLines();
       currentIndex = 0;
-      strDir = 1;
       nTimer && clearInterval(nTimer);
     } else {
       nTimer && clearInterval(nTimer);
@@ -159,293 +141,206 @@ $(document).ready(function () {
     // Set the source of the audio element
     audio.src = audioFiles[currentIndex];
     if (isFromTop) {
-      if (strDir === 1) {
-        // line angle change
-        switch (currentIndex) {
-          case 0:
+      // line angle change
+      switch (currentIndex) {
+        case 0:
+          if (string_pos[0] === 0) {
+            string_pos[0] = 1;
             line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-            if (sliderVal == 6) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 6) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 1:
-            line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-            if (sliderVal == 5) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 5) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 2:
-            line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-            if (sliderVal == 4) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 4) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 3:
-            line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-            if (sliderVal == 3) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 3) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 4:
-            line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-            if (sliderVal == 2) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 2) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 5:
-            line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-            if (sliderVal == 1) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 1) {
-              currentIndex = 0;
-            } else {
-              currentIndex = 0;
-            }
-            break;
-        }
-      }
-      //When click it again..
-      else if (strDir === 0) {
-        // line angle change
-        switch (currentIndex) {
-          case 0:
+          } else if (string_pos[0] === 1) {
+            string_pos[0] = 0;
             line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
-            if (sliderVal == 6) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 6) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 1:
+          }
+          if (sliderVal == 6) {
+            currentIndex = 0;
+          } else if (sliderVal > 6) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 1:
+          if (string_pos[1] === 0) {
+            string_pos[1] = 1;
+            line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+          } else if (string_pos[1] === 1) {
+            string_pos[1] = 0;
             line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
-            if (sliderVal == 5) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 5) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 2:
+          }
+          // line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+          if (sliderVal == 5) {
+            currentIndex = 0;
+          } else if (sliderVal > 5) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 2:
+          if (string_pos[2] === 0) {
+            string_pos[2] = 1;
+            line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+          } else if (string_pos[2] === 1) {
+            string_pos[2] = 0;
             line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
-            if (sliderVal == 4) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 4) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 3:
+          }
+          if (sliderVal == 4) {
+            currentIndex = 0;
+          } else if (sliderVal > 4) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 3:
+          if (string_pos[3] === 0) {
+            string_pos[3] = 1;
+            line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+          } else if (string_pos[3] === 1) {
+            string_pos[3] = 0;
             line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
-            if (sliderVal == 3) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 3) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 4:
+          }
+          if (sliderVal == 3) {
+            currentIndex = 0;
+          } else if (sliderVal > 3) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 4:
+          if (string_pos[4] === 0) {
+            string_pos[4] = 1;
+            line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+          } else if (string_pos[4] === 1) {
+            string_pos[4] = 0;
             line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
-            if (sliderVal == 2) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 2) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 5:
+          }
+          if (sliderVal == 2) {
+            currentIndex = 0;
+          } else if (sliderVal > 2) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 5:
+          if (string_pos[5] === 0) {
+            string_pos[5] = 1;
+            line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+          } else if (string_pos[5] === 1) {
+            string_pos[5] = 0;
             line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
-            if (sliderVal == 1) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 1) {
-              currentIndex = 0;
-            } else {
-              currentIndex = 0;
-            }
-            break;
-        }
+          }
+          if (sliderVal == 1) {
+            currentIndex = 0;
+          } else if (sliderVal > 1) {
+            currentIndex = 0;
+          } else {
+            currentIndex = 0;
+          }
+          break;
       }
     } else {
-      //First time click
-      if (strDir === 1) {
-        // line angle change
-        switch (currentIndex) {
-          case 0:
+      
+      // line angle change
+      switch (currentIndex) {
+        case 0:
+          if (string_pos[5] === 0) {
+            string_pos[5] = 1;
             line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-            if (sliderVal == 6) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 6) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 1:
-            line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-            if (sliderVal == 5) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 5) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 2:
-            line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-            if (sliderVal == 4) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 4) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 3:
-            line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-            if (sliderVal == 3) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 3) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 4:
-            line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-            if (sliderVal == 2) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 2) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 5:
-            line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-            if (sliderVal == 1) {
-              strDir = 0;
-              currentIndex = 0;
-            } else if (sliderVal > 1) {
-              currentIndex = 0;
-            } else {
-              currentIndex = 0;
-            }
-            break;
-        }
-      }
-      //When click it again..
-      else if (strDir === 0) {
-        // line angle change
-        switch (currentIndex) {
-          case 0:
+          } else if (string_pos[5] === 1) {
+            string_pos[5] = 0;
             line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
-            if (sliderVal == 6) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 6) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 1:
+          }
+          if (sliderVal == 6) {
+            currentIndex = 0;
+          } else if (sliderVal > 6) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 1:
+          if (string_pos[4] === 0) {
+            string_pos[4] = 1;
+            line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+          } else if (string_pos[4] === 1) {
+            string_pos[4] = 0;
             line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
-            if (sliderVal == 5) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 5) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 2:
+          }
+          if (sliderVal == 5) {
+            currentIndex = 0;
+          } else if (sliderVal > 5) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 2:
+          if (string_pos[3] === 0) {
+            string_pos[3] = 1;
+            line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+          } else if (string_pos[3] === 1) {
+            string_pos[3] = 0;
             line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
-            if (sliderVal == 4) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 4) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 3:
+          }
+          if (sliderVal == 4) {
+            currentIndex = 0;
+          } else if (sliderVal > 4) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 3:
+          if (string_pos[2] === 0) {
+            string_pos[2] = 1;
+            line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+          } else if (string_pos[2] === 1) {
+            string_pos[2] = 0;
             line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
-            if (sliderVal == 3) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 3) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 4:
+          }
+          if (sliderVal == 3) {
+            currentIndex = 0;
+          } else if (sliderVal > 3) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 4:
+          if (string_pos[1] === 0) {
+            string_pos[1] = 1;
+            line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+          } else if (string_pos[1] === 1) {
+            string_pos[1] = 0;
             line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
-            if (sliderVal == 2) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 2) {
-              currentIndex = 0;
-            } else {
-              currentIndex++;
-            }
-            break;
-          case 5:
+          }
+          if (sliderVal == 2) {
+            currentIndex = 0;
+          } else if (sliderVal > 2) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 5:
+          if (string_pos[0] === 0) {
+            string_pos[0] = 1;
+            line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
+          } else if (string_pos[0] === 1) {
+            string_pos[0] = 0;
             line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
-            if (sliderVal == 1) {
-              strDir = 1;
-              currentIndex = 0;
-            } else if (sliderVal > 1) {
-              currentIndex = 0;
-            } else {
-              currentIndex = 0;
-            }
-            break;
-        }
+          }
+          if (sliderVal == 1) {
+            currentIndex = 0;
+          } else if (sliderVal > 1) {
+            currentIndex = 0;
+          } else {
+            currentIndex = 0;
+          }
+          break;
       }
     }
 
@@ -453,29 +348,18 @@ $(document).ready(function () {
     audio.play();
   }
 
-  function resetLines() {
-    line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
-    line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
-    line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
-    line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
-    line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
-    line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
-  }
-
   //Play individual string
-  function playSingleTone(e, strNum) {
+  function playSingleTone(strNum) {
     switch (strNum) {
       case 1:
-        //First time click
-        if (e.name != "Click") {
-          e.name = "Click";
+        if (string_pos[0] === 0) {
+          string_pos[0] = 1;
           line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-        }
-        //When click it again..
-        else if (e.name == "Click") {
-          e.name = "Un  click";
+        } else if (string_pos[0] === 1) {
+          string_pos[0] = 0;
           line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
         }
+
         str6DefNoteEHeavy.currentTime = 0;
         str6DefNoteEHeavy.play();
         setTimeout(function () {
@@ -485,11 +369,11 @@ $(document).ready(function () {
         break;
 
       case 2:
-        if (e.name != "Click") {
-          e.name = "Click";
+        if (string_pos[1] === 0) {
+          string_pos[1] = 1;
           line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-        } else if (e.name == "Click") {
-          e.name = "Unclick";
+        } else if (string_pos[1] === 1) {
+          string_pos[1] = 0;
           line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
         }
         str5DefNoteA.currentTime = 0;
@@ -501,11 +385,11 @@ $(document).ready(function () {
         break;
 
       case 3:
-        if (e.name != "Click") {
-          e.name = "Click";
+        if (string_pos[2] === 0) {
+          string_pos[2] = 1;
           line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-        } else if (e.name == "Click") {
-          e.name = "Unclick";
+        } else if (string_pos[2] === 1) {
+          string_pos[2] = 0;
           line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
         }
         str4DefNoteD.currentTime = 0;
@@ -517,11 +401,11 @@ $(document).ready(function () {
         break;
 
       case 4:
-        if (e.name != "Click") {
-          e.name = "Click";
+        if (string_pos[3] === 0) {
+          string_pos[3] = 1;
           line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-        } else if (e.name == "Click") {
-          e.name = "Unclick";
+        } else if (string_pos[3] === 1) {
+          string_pos[3] = 0;
           line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
         }
         str3DefNoteG.currentTime = 0;
@@ -533,11 +417,11 @@ $(document).ready(function () {
         break;
 
       case 5:
-        if (e.name != "Click") {
-          e.name = "Click";
+        if (string_pos[4] === 0) {
+          string_pos[4] = 1;
           line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-        } else if (e.name == "Click") {
-          e.name = "Unclick";
+        } else if (string_pos[4] === 1) {
+          string_pos[4] = 0;
           line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
         }
         str2DefNoteB.currentTime = 0;
@@ -549,11 +433,11 @@ $(document).ready(function () {
         break;
 
       case 6:
-        if (e.name != "Click") {
-          e.name = "Click";
+        if (string_pos[5] === 0) {
+          string_pos[5] = 1;
           line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-        } else if (e.name == "Click") {
-          e.name = "Unclick";
+        } else if (string_pos[5] === 1) {
+          string_pos[5] = 0;
           line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
         }
         str1DefNoteESoft.currentTime = 0;
@@ -569,10 +453,9 @@ $(document).ready(function () {
     }
   }
 
-  var nTimer = null;
+  let nTimer = null;
 
   const setNewTimer = (value = 1000) => {
-    console.log(value);
     if (Number(sliderVal) > 0) {
       nTimer = setInterval(function () {
         playAudio();
