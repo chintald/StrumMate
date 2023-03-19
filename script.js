@@ -22,8 +22,10 @@ $(document).ready(function () {
 
   // Code for Music
 
-  const defaultPath =
-    "C:\\Users\\chint\\OneDrive\\Desktop\\UWindsor\\ASE\\Prototype\\StrumMate\\steel_string_guitar_sounds";
+  // const defaultPath =
+  //   "C:\\Users\\chint\\OneDrive\\Desktop\\UWindsor\\ASE\\Prototype\\StrumMate\\steel_string_guitar_sounds";
+  // for deployment
+  const defaultPath = "steel_string_guitar_sounds";
   const string6DefaultNoteEHeavy = defaultPath + "\\E3_default_up_cut.mp3";
   const string5DefaultNoteA = defaultPath + "\\A2_default_cut.mp3";
   const string4DefaultNoteD = defaultPath + "\\D3_default_cut.mp3";
@@ -83,13 +85,13 @@ $(document).ready(function () {
   btn7.onclick = function () {
     if (isFromTop) {
       isFromTop = false;
-      btn7.name = "Top";
+      btn7.innerHTML = "Position: Top";
       strDir = 1;
       nTimer && clearInterval(nTimer);
       setNewTimer(interval);
     } else {
       isFromTop = true;
-      btn7.name = "Bottom";
+      btn7.innerHTML = "Position: Bottom";
       strDir = 1;
       nTimer && clearInterval(nTimer);
       setNewTimer(interval);
