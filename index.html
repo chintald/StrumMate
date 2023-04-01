@@ -1,178 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>StrumMate</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
-  </head>
 
-  <body>
-    <section class="">
-      <div class="guitar" id="guitar">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          style="position: absolute; margin-top: 25px"
-        >
-          <line
-            id="line"
-            x1="0"
-            y1="100"
-            x2="100"
-            y2="100"
-            stroke-width="1"
-            stroke="yellow"
-            style="visibility: hidden"
-          ></line>
-          <line
-            id="line1"
-            x1="0"
-            y1="100"
-            x2="100"
-            y2="100"
-            stroke-width="1"
-            stroke="orange"
-          ></line>
-          <line
-            id="line2"
-            x1="0"
-            y1="100"
-            x2="100"
-            y2="100"
-            stroke-width="1"
-            stroke="red"
-          ></line>
-          <line
-            id="line3"
-            x1="0"
-            y1="100"
-            x2="100"
-            y2="100"
-            stroke-width="1"
-            stroke="rgb(238, 94, 118)"
-          ></line>
-          <line
-            id="line4"
-            x1="0"
-            y1="100"
-            x2="100"
-            y2="100"
-            stroke-width="1"
-            stroke="purple"
-          ></line>
-          <line
-            id="line5"
-            x1="0"
-            y1="100"
-            x2="100"
-            y2="100"
-            stroke-width="1"
-            stroke="blue"
-          ></line>
-          <line
-            id="line6"
-            x1="0"
-            y1="100"
-            x2="100"
-            y2="100"
-            stroke-width="1"
-            stroke="green"
-          ></line>
-        </svg>
+<head>
+  <meta charset="UTF-8" />
+  <title>StrumMate</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+</head>
 
-        <div
-          style="
+<body>
+  <section class="">
+    <div class="guitar" id="guitar">
+      <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; margin-top: 25px">
+        <line id="line" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="yellow" style="visibility: hidden">
+        </line>
+        <line id="line1" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="orange"></line>
+        <line id="line2" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="red"></line>
+        <line id="line3" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="rgb(238, 94, 118)"></line>
+        <line id="line4" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="purple"></line>
+        <line id="line5" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="blue"></line>
+        <line id="line6" x1="0" y1="100" x2="100" y2="100" stroke-width="1" stroke="green"></line>
+      </svg>
+
+      <div style="
             position: absolute;
             margin: 10px;
             margin-top: 117px;
             margin-left: 90px;
-          "
-        >
-          <img
-            src="mockup-two-covers.jpg"
-            alt="box"
-            height="55px"
-            width="30px"
-          />
-        </div>
-        <img
-          src="guitar.png"
-          alt="Guitar"
-          usemap="#guitar-map"
-          height="300px"
-          width="600px"
-        />
-        <map name="guitar-map">
-          <area id="string-1" shape="rect" coords="50, 90, 115, 110" />
-          <area id="string-2" shape="rect" coords="50, 110, 115, 130" />
-          <area id="string-3" shape="rect" coords="50, 130, 115, 150" />
-          <area id="string-4" shape="rect" coords="50, 150, 115, 170" />
-          <area id="string-5" shape="rect" coords="50, 170, 115, 190" />
-          <area id="string-6" shape="rect" coords="50, 190, 115, 210" />
-        </map>
+          ">
+        <img src="mockup-two-covers.jpg" alt="box" height="55px" width="30px" />
       </div>
-      <div id="inputBtns">
-        <button id="btn1" class="button str1" title="Play string 1 from top">
-          Str 6
-        </button>
-        <button id="btn2" class="button str2" title="Play string 2 from top">
-          Str 5
-        </button>
-        <button id="btn3" class="button str3" title="Play string 3 from top">
-          Str 4
-        </button>
-        <button id="btn4" class="button str4" title="Play string 4 from top">
-          Str 3
-        </button>
-        <button id="btn5" class="button str5" title="Play string 5 from top">
-          Str 2
-        </button>
-        <button id="btn6" class="button str6" title="Play string 6 from top">
-          Str 1
-        </button>
-        <button
-          id="btn7"
-          class="button"
-          style="width: 150px;"
-          title="Toggle direction to play all strings"
-          value="Top"
-        >
-          Position: Top
-        </button>
-      </div>
-      <div id="inputs">
-        <div class="part1">
-          <div class="part1top">
-            <input
-              type="range"
-              id="slider1"
-              min="0"
-              max="6"
-              value="0"
-              title="Play n strings continuously"
-            />
-          </div>
-          <div class="part1bottom">
-            <span class="slider1-range-value">No. of Strings</span>
-          </div>
+      <img src="guitar.png" alt="Guitar" usemap="#guitar-map" height="300px" width="600px" />
+      <map name="guitar-map">
+        <area id="string-1" shape="rect" coords="50, 90, 115, 110" />
+        <area id="string-2" shape="rect" coords="50, 110, 115, 130" />
+        <area id="string-3" shape="rect" coords="50, 130, 115, 150" />
+        <area id="string-4" shape="rect" coords="50, 150, 115, 170" />
+        <area id="string-5" shape="rect" coords="50, 170, 115, 190" />
+        <area id="string-6" shape="rect" coords="50, 190, 115, 210" />
+      </map>
+    </div>
+    <div id="inputBtns">
+      <button id="btn1" class="button str1 tone-button" title="Play string 1 from top">
+        Str 6
+      </button>
+      <button id="btn2" class="button str2 tone-button" title="Play string 2 from top">
+        Str 5
+      </button>
+      <button id="btn3" class="button str3 tone-button" title="Play string 3 from top">
+        Str 4
+      </button>
+      <button id="btn4" class="button str4 tone-button" title="Play string 4 from top">
+        Str 3
+      </button>
+      <button id="btn5" class="button str5 tone-button" title="Play string 5 from top">
+        Str 2
+      </button>
+      <button id="btn6" class="button str6 tone-button" title="Play string 6 from top">
+        Str 1
+      </button>
+      <button id="btn7" class="button" style="width: 150px;" title="Toggle direction to play all strings" value="Top">
+        Position: Top
+      </button>
+    </div>
+    <div id="inputs">
+      <div class="part1">
+        <div class="part1top">
+          <input type="range" id="slider1" min="0" max="6" value="0" title="Play n strings continuously" />
         </div>
-        <div class="part1">
-          <div class="part1top">
-            <input
-              type="range"
-              id="slider2"
-              min="125"
-              max="1000"
-              value="1000"
-              title="Control speed of playing n strings continuously"
-            />
-          </div>
-          <div class="part1bottom">
-            <span class="slider2-range-value">Speed</span>
-          </div>
+        <div class="part1bottom">
+          <span class="slider1-range-value">No. of Strings</span>
         </div>
       </div>
-    </section>
-  </body>
+      <div class="part1">
+        <div class="part1top">
+          <input type="range" id="slider2" min="125" max="1000" value="1000"
+            title="Control speed of playing n strings continuously" />
+        </div>
+        <div class="part1bottom">
+          <span class="slider2-range-value">Speed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
 </html>

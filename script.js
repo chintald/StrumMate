@@ -2,27 +2,13 @@ $(document).ready(function () {
   let line = document.getElementById("line");
   line.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
 
-  let line1 = document.getElementById("line1");
-  line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+  // String position initialization
+  for (let i = 1; i <= 6; i++) {
+    let line = document.getElementById(`line${i}`);
+    line.setAttribute("transform", `rotate(${180}, 100, ${100 + (i - 1) * 4})`);
+  }
 
-  let line2 = document.getElementById("line2");
-  line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
-
-  let line3 = document.getElementById("line3");
-  line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
-
-  let line4 = document.getElementById("line4");
-  line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
-
-  let line5 = document.getElementById("line5");
-  line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
-
-  let line6 = document.getElementById("line6");
-  line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
-
-  let string_pos = [0, 0, 0, 0, 0, 0];
   // Code for Music
-
   const defaultPath = "steel_string_guitar_sounds";
   const string6DefaultNoteEHeavy = defaultPath + "\\E3_default_up_cut.mp3";
   const string5DefaultNoteA = defaultPath + "\\A2_default_cut.mp3";
@@ -40,12 +26,6 @@ $(document).ready(function () {
 
   const slider1 = document.getElementById("slider1");
   const slider2 = document.getElementById("slider2");
-  const btn1 = document.getElementById("btn1");
-  const btn2 = document.getElementById("btn2");
-  const btn3 = document.getElementById("btn3");
-  const btn4 = document.getElementById("btn4");
-  const btn5 = document.getElementById("btn5");
-  const btn6 = document.getElementById("btn6");
   const btn7 = document.getElementById("btn7");
 
   let isFromTop = true;
@@ -53,42 +33,25 @@ $(document).ready(function () {
   let audioFiles = [];
   // Get a reference to the audio element
   const audio = new Audio();
+
   // Define a variable to keep track of the current audio file index
   let currentIndex = 0;
   let sliderVal = 0;
 
-  btn1.onclick = function () {
-    playSingleTone(1);
-  };
-  btn2.onclick = function () {
-    playSingleTone(2);
-  };
-  btn3.onclick = function () {
-    playSingleTone(3);
-  };
-  btn4.onclick = function () {
-    playSingleTone(4);
-  };
-  btn5.onclick = function () {
-    playSingleTone(5);
-  };
-  btn6.onclick = function () {
-    playSingleTone(6);
-  };
+  // Buttons click listener
+  const buttons = document.querySelectorAll('.tone-button');
+  buttons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      playSingleTone(index + 1);
+    });
+  });
 
-  //set initial position
+  //set initial position for Top/Bottom button
   btn7.onclick = function () {
-    if (isFromTop === true) {
-      isFromTop = false;
-      btn7.innerHTML = "Current Position: Bottom";
-      nTimer && clearInterval(nTimer);
-      setNewTimer(interval);
-    } else {
-      isFromTop = true;
-      btn7.innerHTML = "Current Position: Top";
-      nTimer && clearInterval(nTimer);
-      setNewTimer(interval);
-    }
+    isFromTop = !isFromTop;
+    btn7.innerHTML = `Current Position: ${isFromTop ? 'Top' : 'Bottom'}`;
+    nTimer && clearInterval(nTimer);
+    setNewTimer(interval);
   };
 
   // Preload the audio files
@@ -117,6 +80,38 @@ $(document).ready(function () {
   });
 
   // Define a function to play the audio
+  let strings = [
+    { pos: 0, line: line1, note: str6DefNoteEHeavy },
+    { pos: 0, line: line2, note: str5DefNoteA },
+    { pos: 0, line: line3, note: str4DefNoteD },
+    { pos: 0, line: line4, note: str3DefNoteG },
+    { pos: 0, line: line5, note: str2DefNoteB },
+    { pos: 0, line: line6, note: str1DefNoteESoft },
+  ];
+
+  function toggleStringPosition(strNum) {
+    let str = strings[strNum - 1];
+    if (str.pos === 0) {
+      str.pos = 1;
+      str.line.setAttribute("transform", "rotate(" + 185 + ", 100, " + (100 + (strNum - 1) * 4) + ")");
+    } else if (str.pos === 1) {
+      str.pos = 0;
+      str.line.setAttribute("transform", "rotate(" + 180 + ", 100, " + (100 + (strNum - 1) * 4) + ")");
+    }
+  }
+
+  // Play individual string
+  function playSingleTone(strNum) {
+    toggleStringPosition(strNum);
+    let str = strings[strNum - 1];
+    str.note.currentTime = 0;
+    str.note.play();
+    setTimeout(function () {
+      str.note.pause();
+      str.note.currentTime = 0;
+    }, 1100);
+  }
+
   function playAudio() {
     if (isFromTop) {
       audioFiles = [
@@ -144,11 +139,11 @@ $(document).ready(function () {
       // line angle change
       switch (currentIndex) {
         case 0:
-          if (string_pos[0] === 0) {
-            string_pos[0] = 1;
+          if (strings[0].pos === 0) {
+            strings[0].pos = 1;
             line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-          } else if (string_pos[0] === 1) {
-            string_pos[0] = 0;
+          } else if (strings[0].pos === 1) {
+            strings[0].pos = 0;
             line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
           }
           if (sliderVal == 6) {
@@ -160,14 +155,13 @@ $(document).ready(function () {
           }
           break;
         case 1:
-          if (string_pos[1] === 0) {
-            string_pos[1] = 1;
+          if (strings[1].pos === 0) {
+            strings[1].pos = 1;
             line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-          } else if (string_pos[1] === 1) {
-            string_pos[1] = 0;
+          } else if (strings[1].pos === 1) {
+            strings[1].pos = 0;
             line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
           }
-          // line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
           if (sliderVal == 5) {
             currentIndex = 0;
           } else if (sliderVal > 5) {
@@ -177,11 +171,11 @@ $(document).ready(function () {
           }
           break;
         case 2:
-          if (string_pos[2] === 0) {
-            string_pos[2] = 1;
+          if (strings[2].pos === 0) {
+            strings[2].pos = 1;
             line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-          } else if (string_pos[2] === 1) {
-            string_pos[2] = 0;
+          } else if (strings[2].pos === 1) {
+            strings[2].pos = 0;
             line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
           }
           if (sliderVal == 4) {
@@ -193,11 +187,11 @@ $(document).ready(function () {
           }
           break;
         case 3:
-          if (string_pos[3] === 0) {
-            string_pos[3] = 1;
+          if (strings[3].pos === 0) {
+            strings[3].pos = 1;
             line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-          } else if (string_pos[3] === 1) {
-            string_pos[3] = 0;
+          } else if (strings[3].pos === 1) {
+            strings[3].pos = 0;
             line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
           }
           if (sliderVal == 3) {
@@ -209,11 +203,11 @@ $(document).ready(function () {
           }
           break;
         case 4:
-          if (string_pos[4] === 0) {
-            string_pos[4] = 1;
+          if (strings[4].pos === 0) {
+            strings[4].pos = 1;
             line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-          } else if (string_pos[4] === 1) {
-            string_pos[4] = 0;
+          } else if (strings[4].pos === 1) {
+            strings[4].pos = 0;
             line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
           }
           if (sliderVal == 2) {
@@ -225,11 +219,11 @@ $(document).ready(function () {
           }
           break;
         case 5:
-          if (string_pos[5] === 0) {
-            string_pos[5] = 1;
+          if (strings[5].pos === 0) {
+            strings[5].pos = 1;
             line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-          } else if (string_pos[5] === 1) {
-            string_pos[5] = 0;
+          } else if (strings[5].pos === 1) {
+            strings[5].pos = 0;
             line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
           }
           if (sliderVal == 1) {
@@ -242,15 +236,15 @@ $(document).ready(function () {
           break;
       }
     } else {
-      
+
       // line angle change
       switch (currentIndex) {
         case 0:
-          if (string_pos[5] === 0) {
-            string_pos[5] = 1;
+          if (strings[5].pos === 0) {
+            strings[5].pos = 1;
             line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-          } else if (string_pos[5] === 1) {
-            string_pos[5] = 0;
+          } else if (strings[5].pos === 1) {
+            strings[5].pos = 0;
             line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
           }
           if (sliderVal == 6) {
@@ -262,11 +256,11 @@ $(document).ready(function () {
           }
           break;
         case 1:
-          if (string_pos[4] === 0) {
-            string_pos[4] = 1;
+          if (strings[4].pos === 0) {
+            strings[4].pos = 1;
             line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-          } else if (string_pos[4] === 1) {
-            string_pos[4] = 0;
+          } else if (strings[4].pos === 1) {
+            strings[4].pos = 0;
             line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
           }
           if (sliderVal == 5) {
@@ -278,11 +272,11 @@ $(document).ready(function () {
           }
           break;
         case 2:
-          if (string_pos[3] === 0) {
-            string_pos[3] = 1;
+          if (strings[3].pos === 0) {
+            strings[3].pos = 1;
             line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-          } else if (string_pos[3] === 1) {
-            string_pos[3] = 0;
+          } else if (strings[3].pos === 1) {
+            strings[3].pos = 0;
             line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
           }
           if (sliderVal == 4) {
@@ -294,11 +288,11 @@ $(document).ready(function () {
           }
           break;
         case 3:
-          if (string_pos[2] === 0) {
-            string_pos[2] = 1;
+          if (strings[2].pos === 0) {
+            strings[2].pos = 1;
             line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-          } else if (string_pos[2] === 1) {
-            string_pos[2] = 0;
+          } else if (strings[2].pos === 1) {
+            strings[2].pos = 0;
             line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
           }
           if (sliderVal == 3) {
@@ -310,11 +304,11 @@ $(document).ready(function () {
           }
           break;
         case 4:
-          if (string_pos[1] === 0) {
-            string_pos[1] = 1;
+          if (strings[1].pos === 0) {
+            strings[1].pos = 1;
             line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-          } else if (string_pos[1] === 1) {
-            string_pos[1] = 0;
+          } else if (strings[1].pos === 1) {
+            strings[1].pos = 0;
             line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
           }
           if (sliderVal == 2) {
@@ -326,11 +320,11 @@ $(document).ready(function () {
           }
           break;
         case 5:
-          if (string_pos[0] === 0) {
-            string_pos[0] = 1;
+          if (strings[0].pos === 0) {
+            strings[0].pos = 1;
             line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-          } else if (string_pos[0] === 1) {
-            string_pos[0] = 0;
+          } else if (strings[0].pos === 1) {
+            strings[0].pos = 0;
             line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
           }
           if (sliderVal == 1) {
@@ -346,111 +340,6 @@ $(document).ready(function () {
 
     // Play the audio
     audio.play();
-  }
-
-  //Play individual string
-  function playSingleTone(strNum) {
-    switch (strNum) {
-      case 1:
-        if (string_pos[0] === 0) {
-          string_pos[0] = 1;
-          line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
-        } else if (string_pos[0] === 1) {
-          string_pos[0] = 0;
-          line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
-        }
-
-        str6DefNoteEHeavy.currentTime = 0;
-        str6DefNoteEHeavy.play();
-        setTimeout(function () {
-          str6DefNoteEHeavy.pause();
-          str6DefNoteEHeavy.currentTime = 0;
-        }, 1100);
-        break;
-
-      case 2:
-        if (string_pos[1] === 0) {
-          string_pos[1] = 1;
-          line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
-        } else if (string_pos[1] === 1) {
-          string_pos[1] = 0;
-          line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
-        }
-        str5DefNoteA.currentTime = 0;
-        str5DefNoteA.play();
-        setTimeout(function () {
-          str5DefNoteA.pause();
-          str5DefNoteA.currentTime = 0;
-        }, 1100);
-        break;
-
-      case 3:
-        if (string_pos[2] === 0) {
-          string_pos[2] = 1;
-          line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
-        } else if (string_pos[2] === 1) {
-          string_pos[2] = 0;
-          line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
-        }
-        str4DefNoteD.currentTime = 0;
-        str4DefNoteD.play();
-        setTimeout(function () {
-          str4DefNoteD.pause();
-          str4DefNoteD.currentTime = 0;
-        }, 1100);
-        break;
-
-      case 4:
-        if (string_pos[3] === 0) {
-          string_pos[3] = 1;
-          line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
-        } else if (string_pos[3] === 1) {
-          string_pos[3] = 0;
-          line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
-        }
-        str3DefNoteG.currentTime = 0;
-        str3DefNoteG.play();
-        setTimeout(function () {
-          str3DefNoteG.pause();
-          str3DefNoteG.currentTime = 0;
-        }, 1100);
-        break;
-
-      case 5:
-        if (string_pos[4] === 0) {
-          string_pos[4] = 1;
-          line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
-        } else if (string_pos[4] === 1) {
-          string_pos[4] = 0;
-          line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
-        }
-        str2DefNoteB.currentTime = 0;
-        str2DefNoteB.play();
-        setTimeout(function () {
-          str2DefNoteB.pause();
-          str2DefNoteB.currentTime = 0;
-        }, 1100);
-        break;
-
-      case 6:
-        if (string_pos[5] === 0) {
-          string_pos[5] = 1;
-          line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
-        } else if (string_pos[5] === 1) {
-          string_pos[5] = 0;
-          line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
-        }
-        str1DefNoteESoft.currentTime = 0;
-        str1DefNoteESoft.play();
-        setTimeout(function () {
-          str1DefNoteESoft.pause();
-          str1DefNoteESoft.currentTime = 0;
-        }, 1100);
-        break;
-
-      default:
-        break;
-    }
   }
 
   let nTimer = null;
