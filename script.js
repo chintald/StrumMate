@@ -1,4 +1,12 @@
 $(document).ready(function () {
+  var swiper = new Swiper(".swiper-container", {
+    // Navigation arrows
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    loop: true,
+  });
   let line = document.getElementById("line");
   line.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
 
@@ -39,9 +47,9 @@ $(document).ready(function () {
   let sliderVal = 0;
 
   // Buttons click listener
-  const buttons = document.querySelectorAll('.tone-button');
+  const buttons = document.querySelectorAll(".tone-button");
   buttons.forEach((button, index) => {
-    button.addEventListener('click', () => {
+    button.addEventListener("click", () => {
       playSingleTone(index + 1);
     });
   });
@@ -49,7 +57,7 @@ $(document).ready(function () {
   //set initial position for Top/Bottom button
   btn7.onclick = function () {
     isFromTop = !isFromTop;
-    btn7.innerHTML = `Current Position: ${isFromTop ? 'Top' : 'Bottom'}`;
+    btn7.innerHTML = `Current Position: ${isFromTop ? "Top" : "Bottom"}`;
     nTimer && clearInterval(nTimer);
     setNewTimer(interval);
   };
@@ -93,10 +101,16 @@ $(document).ready(function () {
     let str = strings[strNum - 1];
     if (str.pos === 0) {
       str.pos = 1;
-      str.line.setAttribute("transform", "rotate(" + 185 + ", 100, " + (100 + (strNum - 1) * 4) + ")");
+      str.line.setAttribute(
+        "transform",
+        "rotate(" + 185 + ", 100, " + (100 + (strNum - 1) * 4) + ")"
+      );
     } else if (str.pos === 1) {
       str.pos = 0;
-      str.line.setAttribute("transform", "rotate(" + 180 + ", 100, " + (100 + (strNum - 1) * 4) + ")");
+      str.line.setAttribute(
+        "transform",
+        "rotate(" + 180 + ", 100, " + (100 + (strNum - 1) * 4) + ")"
+      );
     }
   }
 
@@ -236,7 +250,6 @@ $(document).ready(function () {
           break;
       }
     } else {
-
       // line angle change
       switch (currentIndex) {
         case 0:
