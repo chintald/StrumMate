@@ -1,3 +1,5 @@
+// import Swiper from "swiper";
+// import "swiper/css";
 $(document).ready(function () {
   var swiper = new Swiper(".swiper-container", {
     // Navigation arrows
@@ -7,6 +9,11 @@ $(document).ready(function () {
     },
     loop: true,
   });
+  // init Swiper:
+  // const swiper = new Swiper('.swiper', {
+  //   // configure Swiper to use modules
+  //   modules: [Navigation],
+  // });
   let line = document.getElementById("line");
   line.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
 
