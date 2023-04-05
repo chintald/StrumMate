@@ -149,50 +149,34 @@ input[type="range"]::-ms-thumb::before {
   /* background-color: red; */
 }
 
-.str1 {
-  color: orange;
-}
 .str1:hover {
-  background-color: orange;
-  color: black;
+  background-color: orange !important;
+  color: black !important;
 }
 
-.str2 {
-  color: red;
-}
 .str2:hover {
-  background-color: red;
-  color: black;
+  background-color: red !important;
+  color: black !important;
 }
 
-.str3 {
-  color: var(--pinkish);
-}
 .str3:hover {
-  background-color: var(--pinkish);
-  color: black;
+  background-color: var(--pinkish) !important;
+  color: black !important;
 }
 
-.str4 {
-  color: purple;
-}
 .str4:hover {
-  background-color: purple;
-  color: black;
+  background-color: purple !important;
+  color: black !important;
 }
-.str5 {
-  color: blue;
-}
+
 .str5:hover {
-  background-color: blue;
-  color: black;
+  background-color: blue !important;
+  color: black !important;
 }
-.str6 {
-  color: green;
-}
+
 .str6:hover {
-  background-color: green;
-  color: black;
+  background-color: green !important;
+  color: black !important;
 }
 
 /* PHENI */
@@ -283,4 +267,61 @@ body::-webkit-scrollbar-thumb:hover {
 .swiper-button-next,
 .swiper-button-prev {
   outline: none;
+}
+
+/* Button CSS */
+/* CSS */
+.button-18 {
+  align-items: center;
+  background-color: #0a66c2;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto,
+    "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+    box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+    color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-18:hover,
+.button-18:focus {
+  background-color: #16437e;
+  color: #ffffff;
+}
+
+.button-18:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, 0.7);
+}
+
+.button-18:disabled {
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+  display: none;
 }

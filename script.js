@@ -1,19 +1,136 @@
-// import Swiper from "swiper";
-// import "swiper/css";
 $(document).ready(function () {
-  var swiper = new Swiper(".swiper-container", {
-    // Navigation arrows
+  let swiper = new Swiper(".swiper-container", {
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
     loop: true,
   });
-  // init Swiper:
-  // const swiper = new Swiper('.swiper', {
-  //   // configure Swiper to use modules
-  //   modules: [Navigation],
-  // });
+  document.getElementById("mockup_section").classList.toggle("hidden");
+
+  let nav_home = document.getElementById("nav_home");
+  let nav_mockup = document.getElementById("nav_mockup");
+
+  nav_home.onclick = function () {
+    document.getElementById("home_section").classList.toggle("hidden");
+    document.getElementById("mockup_section").classList.toggle("hidden");
+  };
+
+  nav_mockup.onclick = function () {
+    document.getElementById("home_section").classList.toggle("hidden");
+    document.getElementById("mockup_section").classList.toggle("hidden");
+  };
+
+  const driver = new Driver({
+    allowClose: false, // disable closing the tour window
+  });
+
+  const steps = [
+    {
+      element: "#ind_btns",
+      popover: {
+        title: "Strike individual strings",
+        description:
+          "Click these buttons to strike individual strings resembling to colors you see when you hover on them.",
+        position: "left",
+        offset: 10,
+      },
+      onNext: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.moveNext();
+        }, 100);
+      },
+    },
+    {
+      element: "#btn7",
+      popover: {
+        title: "Switch to change Direction",
+        description:
+          "When striking multiple strings using sliders given below, you can use this switch to change direction of strumming",
+        position: "right",
+        offset: 10,
+      },
+      onNext: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.moveNext();
+        }, 100);
+      },
+      onPrevious: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.movePrevious();
+        }, 100);
+      },
+    },
+    {
+      element: "#slider1",
+      popover: {
+        title: "Slider to strike multiple synchronous strings.",
+        description:
+          "Slider has 6 stops in between. First stop from top strikes the first string. Second stop from top strikes the top two strings. Third stop from top strikes the top three strings. And so on.",
+        position: "left",
+        offset: 10,
+      },
+      onNext: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.moveNext();
+        }, 100);
+      },
+      onPrevious: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.movePrevious();
+        }, 100);
+      },
+    },
+    {
+      element: "#slider2",
+      popover: {
+        title:
+          "Slider to control speed of striking multiple synchronous strings.",
+        description:
+          "When striking multiple strings using slider given on the left, you can use this slider to control speed of strumming.",
+        position: "right",
+        offset: 10,
+      },
+      onPrevious: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.movePrevious();
+        }, 100);
+      },
+      onEnter: (element) => {
+        console.log(element);
+      },
+    },
+  ];
+
+  document.getElementById("nav_how_to_play").addEventListener("click", () => {
+    driver.defineSteps(steps); // set the steps for the tour
+    driver.start(); // start the tour
+  });
+
   let line = document.getElementById("line");
   line.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
 
