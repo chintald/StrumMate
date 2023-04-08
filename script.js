@@ -1,152 +1,491 @@
 $(document).ready(function () {
-  var line = document.getElementById("line");
-  line.setAttribute("transform", "rotate(" + 160 + ", 100, 100)");
+  let swiper = new Swiper(".swiper-container", {
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    loop: true,
+  });
+  document.getElementById("mockup_section").classList.toggle("hidden");
+
+  let nav_home = document.getElementById("nav_home");
+  let nav_mockup = document.getElementById("nav_mockup");
+
+  nav_home.onclick = function () {
+    document.getElementById("home_section").classList.toggle("hidden");
+    document.getElementById("mockup_section").classList.toggle("hidden");
+  };
+
+  nav_mockup.onclick = function () {
+    document.getElementById("home_section").classList.toggle("hidden");
+    document.getElementById("mockup_section").classList.toggle("hidden");
+  };
+
+  const driver = new Driver({
+    allowClose: false, // disable closing the tour window
+  });
+
+  const steps = [
+    {
+      element: "#ind_btns",
+      popover: {
+        title: "Strike individual strings",
+        description:
+          "Click these buttons to strike individual strings resembling to colors you see when you hover on them.",
+        position: "left",
+        offset: 10,
+      },
+      onNext: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.moveNext();
+        }, 100);
+      },
+    },
+    {
+      element: "#btn7",
+      popover: {
+        title: "Switch to change Direction",
+        description:
+          "When striking multiple strings using sliders given below, you can use this switch to change direction of strumming",
+        position: "right",
+        offset: 10,
+      },
+      onNext: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.moveNext();
+        }, 100);
+      },
+      onPrevious: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.movePrevious();
+        }, 100);
+      },
+    },
+    {
+      element: "#slider1",
+      popover: {
+        title: "Slider to strike multiple synchronous strings.",
+        description:
+          "Slider has 6 stops in between. First stop from top strikes the first string. Second stop from top strikes the top two strings. Third stop from top strikes the top three strings. And so on.",
+        position: "left",
+        offset: 10,
+      },
+      onNext: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.moveNext();
+        }, 100);
+      },
+      onPrevious: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.movePrevious();
+        }, 100);
+      },
+    },
+    {
+      element: "#slider2",
+      popover: {
+        title:
+          "Slider to control speed of striking multiple synchronous strings.",
+        description:
+          "When striking multiple strings using slider given on the left, you can use this slider to control speed of strumming.",
+        position: "right",
+        offset: 10,
+      },
+      onPrevious: () => {
+        // Prevent moving to the next step
+        driver.preventMove();
+        // Perform some action or create the element to move to
+        // And then move to that element
+        setTimeout(() => {
+          driver.movePrevious();
+        }, 100);
+      },
+      onEnter: (element) => {
+        console.log(element);
+      },
+    },
+  ];
+
+  document.getElementById("nav_how_to_play").addEventListener("click", () => {
+    driver.defineSteps(steps); // set the steps for the tour
+    driver.start(); // start the tour
+  });
+
+  let line = document.getElementById("line");
+  line.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+
+  // String position initialization
+  for (let i = 1; i <= 6; i++) {
+    let line = document.getElementById(`line${i}`);
+    line.setAttribute("transform", `rotate(${180}, 100, ${100 + (i - 1) * 4})`);
+  }
 
   // Code for Music
+  const defaultPath = "steel_string_guitar_sounds";
+  const string6DefaultNoteEHeavy = defaultPath + "\\E3_default_up_cut.mp3";
+  const string5DefaultNoteA = defaultPath + "\\A2_default_cut.mp3";
+  const string4DefaultNoteD = defaultPath + "\\D3_default_cut.mp3";
+  const string3DefaultNoteG = defaultPath + "\\G3_default_cut.mp3";
+  const string2DefaultNoteB = defaultPath + "\\B3_default_cut.mp3";
+  const string1DefaultNoteESoft = defaultPath + "\\Eb4_default_down_cut.mp3";
 
-  const defaultPath = "C:\\Users\\chint\\OneDrive\\Desktop\\UWindsor\\ASE\\Prototype\\StrumMate\\steel_string_guitar_sounds";
-  const string6DefaultNoteEHeavy = (defaultPath+'\\E3_default_up.mp3');
-  const string5DefaultNoteB = (defaultPath+'\\B3_default.mp3');
-  const string4DefaultNoteG = (defaultPath+'\\G3_default.mp3');
-  const string3DefaultNoteD = (defaultPath+'\\D3_default.mp3');
-  const string2DefaultNoteA = (defaultPath+'\\A2_default.mp3');
-  const string1DefaultNoteESoft = (defaultPath+'\\Eb4_default_down.mp3');
-
-
-  var str1DefNoteESoft = new Audio(string1DefaultNoteESoft);
-  var str2DefNoteA = new Audio(string2DefaultNoteA);
-  var str3DefNoteD = new Audio(string3DefaultNoteD);
-  var str4DefNoteG = new Audio(string4DefaultNoteG);
-  var str5DefNoteB = new Audio(string5DefaultNoteB);
-  var str6DefNoteEHeavy = new Audio(string6DefaultNoteEHeavy);
-
+  let str1DefNoteESoft = new Audio(string1DefaultNoteESoft);
+  let str2DefNoteB = new Audio(string2DefaultNoteB);
+  let str3DefNoteG = new Audio(string3DefaultNoteG);
+  let str4DefNoteD = new Audio(string4DefaultNoteD);
+  let str5DefNoteA = new Audio(string5DefaultNoteA);
+  let str6DefNoteEHeavy = new Audio(string6DefaultNoteEHeavy);
 
   const slider1 = document.getElementById("slider1");
   const slider2 = document.getElementById("slider2");
-  const slider1Value = $('.slider1-range-value');
-  const slider2Value = $('.slider 2-range-value');
+  const btn7 = document.getElementById("btn7");
 
-  var i = 160;
-  var baseAngle = 160;
-  var ltr = 1;
-  var timer = null;
+  let isFromTop = true;
+  let interval = 1000;
+  let audioFiles = [];
+  // Get a reference to the audio element
+  const audio = new Audio();
 
-  const setTimer = (maxAngle, timeInterval) => {
-    i >= maxAngle && (ltr = -1);
-    i === baseAngle && (ltr = 1);
-    timer = setInterval(function () {
-      ltr === 1 && (i += 1);
-      ltr === -1 && (i -= 1);
-      line.setAttribute("transform", "rotate(" + i + ", 100, 100)");
-      playTone(i);
-      i >= maxAngle && (ltr = -1);
-      i === baseAngle && (ltr = 1);
-    }, timeInterval);   
-  }
+  // Define a variable to keep track of the current audio file index
+  let currentIndex = 0;
+  let sliderVal = 0;
 
-  const clearTimer = (isStop = false) => {
-    timer && clearInterval(timer);
-    timer = null;
-    if (isStop) {
-      i = baseAngle
-      ltr = 1;
-      line.setAttribute("transform", "rotate(" + baseAngle + ", 100, 100)");
-    }
-  }
+  // Buttons click listener
+  const buttons = document.querySelectorAll(".tone-button");
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      playSingleTone(index + 1);
+    });
+  });
 
-  var slider1Val = 0;
-  var slider2Val = 25;
+  //set initial position for Top/Bottom button
+  btn7.onclick = function () {
+    isFromTop = !isFromTop;
+    btn7.innerHTML = `Current Position: ${isFromTop ? "Top" : "Bottom"}`;
+    nTimer && clearInterval(nTimer);
+    setNewTimer(interval);
+  };
 
-  const sliderFunc = (sliderVal, timeInterval) => {
-    switch (true) {
-      case (sliderVal > 0 && sliderVal <= 340):
-        clearTimer();
-        timer === null && setTimer(172, timeInterval);
-        break;
-      case (sliderVal >= 341 && sliderVal <= 680):
-        clearTimer();
-        timer === null && setTimer(184, timeInterval)
-        break;
-      case (sliderVal >= 681 && sliderVal <= 1023):
-        clearTimer();
-        timer === null && setTimer(196, timeInterval);
-        break;
-      default:
-        clearTimer(true);
-        break;
-    }
-  }
+  // Preload the audio files
+  audioFiles.forEach((file) => {
+    const audio = new Audio();
+    audio.src = file;
+    audio.load();
+  });
 
+  //Slider listeners
   slider1.addEventListener("input", function () {
-    slider1Val = this.value;
-    sliderFunc(slider1Val, slider2Val);
+    sliderVal = this.value;
+    if (this.value == 0) {
+      currentIndex = 0;
+      nTimer && clearInterval(nTimer);
+    } else {
+      nTimer && clearInterval(nTimer);
+      setNewTimer(interval);
+    }
   });
 
   slider2.addEventListener("input", function () {
-    slider2Val = this.value;
-    sliderFunc(slider1Val, slider2Val);
+    interval = this.value;
+    nTimer && clearInterval(nTimer);
+    setNewTimer(this.value);
   });
 
+  // Define a function to play the audio
+  let strings = [
+    { pos: 0, line: line1, note: str6DefNoteEHeavy },
+    { pos: 0, line: line2, note: str5DefNoteA },
+    { pos: 0, line: line3, note: str4DefNoteD },
+    { pos: 0, line: line4, note: str3DefNoteG },
+    { pos: 0, line: line5, note: str2DefNoteB },
+    { pos: 0, line: line6, note: str1DefNoteESoft },
+  ];
 
-  function playTone(currentAngle) {
-    switch(true){
-      
-      case (currentAngle === 167):  
-        str6DefNoteEHeavy.currentTime = 0;
-        str6DefNoteEHeavy.play();
-        setTimeout(function() {
-          str6DefNoteEHeavy.pause();
-          str6DefNoteEHeavy.currentTime = 0;
-        }, 1100);
-      break;
-      
-      case (currentAngle === 172):  
-      str5DefNoteB.currentTime = 0;
-        str5DefNoteB.play();
-        setTimeout(function() {
-          str5DefNoteB.pause();
-          str5DefNoteB.currentTime = 0;
-        }, 1100);
-        break;
-
-      case (currentAngle === 176):
-        str4DefNoteG.currentTime = 0;
-        str4DefNoteG.play();
-        setTimeout(function() {
-          str4DefNoteG.pause();
-          str4DefNoteG.currentTime = 0;
-        }, 1100);
-      break;
-      
-      case (currentAngle === 180):
-        str3DefNoteD.currentTime = 0;
-        str3DefNoteD.play();
-        setTimeout(function() {
-          str3DefNoteD.pause();
-          str3DefNoteD.currentTime = 0;
-        }, 1100);
-      break;
-      
-      case (currentAngle === 185):
-        str2DefNoteA.currentTime = 0;
-        str2DefNoteA.play();
-        setTimeout(function() {
-          str2DefNoteA.pause();
-          str2DefNoteA.currentTime = 0;
-        }, 1100);
-      break;
-      
-      case (currentAngle === 190):
-        str1DefNoteESoft.currentTime = 0;
-        str1DefNoteESoft.play();
-        setTimeout(function() {
-          str1DefNoteESoft.pause();
-          str1DefNoteESoft.currentTime = 0;
-        }, 1100);
-        break;
-
-      default:
-        break; 
+  function toggleStringPosition(strNum) {
+    let str = strings[strNum - 1];
+    if (str.pos === 0) {
+      str.pos = 1;
+      str.line.setAttribute(
+        "transform",
+        "rotate(" + 185 + ", 100, " + (100 + (strNum - 1) * 4) + ")"
+      );
+    } else if (str.pos === 1) {
+      str.pos = 0;
+      str.line.setAttribute(
+        "transform",
+        "rotate(" + 180 + ", 100, " + (100 + (strNum - 1) * 4) + ")"
+      );
     }
   }
-});   // Document Ends
+
+  // Play individual string
+  function playSingleTone(strNum) {
+    toggleStringPosition(strNum);
+    let str = strings[strNum - 1];
+    str.note.currentTime = 0;
+    str.note.play();
+    setTimeout(function () {
+      str.note.pause();
+      str.note.currentTime = 0;
+    }, 1100);
+  }
+
+  function playAudio() {
+    if (isFromTop) {
+      audioFiles = [
+        string6DefaultNoteEHeavy,
+        string5DefaultNoteA,
+        string4DefaultNoteD,
+        string3DefaultNoteG,
+        string2DefaultNoteB,
+        string1DefaultNoteESoft,
+      ];
+    } else {
+      audioFiles = [
+        string1DefaultNoteESoft,
+        string2DefaultNoteB,
+        string3DefaultNoteG,
+        string4DefaultNoteD,
+        string5DefaultNoteA,
+        string6DefaultNoteEHeavy,
+      ];
+    }
+
+    // Set the source of the audio element
+    audio.src = audioFiles[currentIndex];
+    if (isFromTop) {
+      // line angle change
+      switch (currentIndex) {
+        case 0:
+          if (strings[0].pos === 0) {
+            strings[0].pos = 1;
+            line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
+          } else if (strings[0].pos === 1) {
+            strings[0].pos = 0;
+            line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+          }
+          if (sliderVal == 6) {
+            currentIndex = 0;
+          } else if (sliderVal > 6) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 1:
+          if (strings[1].pos === 0) {
+            strings[1].pos = 1;
+            line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+          } else if (strings[1].pos === 1) {
+            strings[1].pos = 0;
+            line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+          }
+          if (sliderVal == 5) {
+            currentIndex = 0;
+          } else if (sliderVal > 5) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 2:
+          if (strings[2].pos === 0) {
+            strings[2].pos = 1;
+            line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+          } else if (strings[2].pos === 1) {
+            strings[2].pos = 0;
+            line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+          }
+          if (sliderVal == 4) {
+            currentIndex = 0;
+          } else if (sliderVal > 4) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 3:
+          if (strings[3].pos === 0) {
+            strings[3].pos = 1;
+            line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+          } else if (strings[3].pos === 1) {
+            strings[3].pos = 0;
+            line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+          }
+          if (sliderVal == 3) {
+            currentIndex = 0;
+          } else if (sliderVal > 3) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 4:
+          if (strings[4].pos === 0) {
+            strings[4].pos = 1;
+            line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+          } else if (strings[4].pos === 1) {
+            strings[4].pos = 0;
+            line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+          }
+          if (sliderVal == 2) {
+            currentIndex = 0;
+          } else if (sliderVal > 2) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 5:
+          if (strings[5].pos === 0) {
+            strings[5].pos = 1;
+            line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+          } else if (strings[5].pos === 1) {
+            strings[5].pos = 0;
+            line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
+          }
+          if (sliderVal == 1) {
+            currentIndex = 0;
+          } else if (sliderVal > 1) {
+            currentIndex = 0;
+          } else {
+            currentIndex = 0;
+          }
+          break;
+      }
+    } else {
+      // line angle change
+      switch (currentIndex) {
+        case 0:
+          if (strings[5].pos === 0) {
+            strings[5].pos = 1;
+            line6.setAttribute("transform", "rotate(" + 185 + ", 100, 120)");
+          } else if (strings[5].pos === 1) {
+            strings[5].pos = 0;
+            line6.setAttribute("transform", "rotate(" + 180 + ", 100, 120)");
+          }
+          if (sliderVal == 6) {
+            currentIndex = 0;
+          } else if (sliderVal > 6) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 1:
+          if (strings[4].pos === 0) {
+            strings[4].pos = 1;
+            line5.setAttribute("transform", "rotate(" + 185 + ", 100, 116)");
+          } else if (strings[4].pos === 1) {
+            strings[4].pos = 0;
+            line5.setAttribute("transform", "rotate(" + 180 + ", 100, 116)");
+          }
+          if (sliderVal == 5) {
+            currentIndex = 0;
+          } else if (sliderVal > 5) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 2:
+          if (strings[3].pos === 0) {
+            strings[3].pos = 1;
+            line4.setAttribute("transform", "rotate(" + 185 + ", 100, 112)");
+          } else if (strings[3].pos === 1) {
+            strings[3].pos = 0;
+            line4.setAttribute("transform", "rotate(" + 180 + ", 100, 112)");
+          }
+          if (sliderVal == 4) {
+            currentIndex = 0;
+          } else if (sliderVal > 4) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 3:
+          if (strings[2].pos === 0) {
+            strings[2].pos = 1;
+            line3.setAttribute("transform", "rotate(" + 185 + ", 100, 108)");
+          } else if (strings[2].pos === 1) {
+            strings[2].pos = 0;
+            line3.setAttribute("transform", "rotate(" + 180 + ", 100, 108)");
+          }
+          if (sliderVal == 3) {
+            currentIndex = 0;
+          } else if (sliderVal > 3) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 4:
+          if (strings[1].pos === 0) {
+            strings[1].pos = 1;
+            line2.setAttribute("transform", "rotate(" + 185 + ", 100, 104)");
+          } else if (strings[1].pos === 1) {
+            strings[1].pos = 0;
+            line2.setAttribute("transform", "rotate(" + 180 + ", 100, 104)");
+          }
+          if (sliderVal == 2) {
+            currentIndex = 0;
+          } else if (sliderVal > 2) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          break;
+        case 5:
+          if (strings[0].pos === 0) {
+            strings[0].pos = 1;
+            line1.setAttribute("transform", "rotate(" + 185 + ", 100, 100)");
+          } else if (strings[0].pos === 1) {
+            strings[0].pos = 0;
+            line1.setAttribute("transform", "rotate(" + 180 + ", 100, 100)");
+          }
+          if (sliderVal == 1) {
+            currentIndex = 0;
+          } else if (sliderVal > 1) {
+            currentIndex = 0;
+          } else {
+            currentIndex = 0;
+          }
+          break;
+      }
+    }
+
+    // Play the audio
+    audio.play();
+  }
+
+  let nTimer = null;
+
+  const setNewTimer = (value = 1000) => {
+    if (Number(sliderVal) > 0) {
+      nTimer = setInterval(function () {
+        playAudio();
+      }, value);
+    }
+  };
+}); // Document Ends
